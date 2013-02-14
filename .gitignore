@@ -2,3 +2,15 @@
 .DS_Store
 
 code/terrain_gen_MAS.bak
+
+paper/terrain.aux
+
+paper/terrain.bbl
+
+paper/terrain.blg
+
+paper/terrain.log
+
+paper/terrain.pdf
+
+paper/terrain.synctex.gz
