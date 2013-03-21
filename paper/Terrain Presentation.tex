@@ -297,10 +297,30 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \item Very new technique
 \item This technique has, so far, has mostly been used to extract information for images of natural terrain. 
 \item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C1$ $S$, and $R$. 
-\item $\alpha$ is the parameter that is used to determine the occurrence of peaks or singularities in the terrain. $C1$ is the parameter that controls the spareness of the mean terrain height, or more simply put the roughness of the terrain. $S$ is used as a seed (an initial number) for the random number generator. Lastly, $R$ is for the square resolute of the terrain surface.
-\item This technique uses a turbulent discrete cascade model. This model was originally used to model fluid flows. It applies the idea of singularities, which are sudden changes in the behavior of the turbulence, and applies it to the terrain. In a terrain, singularities can be modeled as mountain peaks
+\begin{itemize}
+\item The first variable, $\alpha$, is used to determine the occurrence of peaks or singularities throughout the terrain.
+\item The second variable, $C1$, is used to contrail the roughness of the terrain
+\item The third variable, $S$, is the random number (seed) generator
+\item The last variable, $R$, is the square resolution of the terrain surface.
+\end{itemize}
 \end{itemize}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Multifractal Technique (cont.)}
+\begin{itemize}
+\item There are four different stages in creating a multi-fractal generated terrain:
+\begin{itemize}
+\item The first stage is to generate a Levy noise field with a certain $\alpha$
+\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function $K(q)$
+\item The third stage is to exponentiate and normalize the output of stage two
+\item The fourth and final stage is to fractal integrate the multi-fractal field
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
 
 \section{Conclusion}
 
