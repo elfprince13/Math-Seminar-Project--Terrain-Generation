@@ -182,56 +182,49 @@
 \begin{frame}
   \frametitle{Midpoint Displacement Method}
 \begin{itemize}
+ \item Relatively straightforward
+ \item Realistic features
 \item Begin with a line between two points.
-\item  The midpoint of this line this then displaced by some random amount in a vertical direction.
+\item The midpoint of this line this then displaced by some random amount in a vertical direction.
 \item The midpoints of these two new line segments are then displaced by a random amount in the vertical direction.
 \item Repeat until you have reached desired level of detail.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Our Midpoint Displacement}
+\frametitle{Midpoint Displacement (cont.)}
 \begin{itemize}
- \item The dimensions of the terrain must be a square with sides of length $2^{N}+1$, so that each sub-square has an exact middle lying on a gridpoint.
-\item H is smoothing parameter, A is an amplitude parameter, R is a random number from a uniform distribution between -1 and 1.
+ \item Must be a square with sides of length $2^{N}+1$, so that each sub-square has an exact middle lying on a gridpoint.
+ \item $k,k' \in \left\{ 1, 3, \cdots, 2^{N-n}-1 \right\}$
+ \item $m \in \left\{ 0, 2, \cdots, 2^{N-n} \right\}$
+  \item $n < N$ and $m \in \mathbb{Z}$.
+ \item H is a smoothing parameter
+ \item A is an amplitude parameter
+ \item R is uniform random variable between -1 and 1.
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Our Midpoint Displacement}
+\frametitle{Midpoint Displacement (cont.)}
 \begin{itemize}
- \item 	Generating fractal terrains by midpoint displacement is a relatively straightforward method for generating artificial terrain with realistic features. The dimensions of the terrain must be a square with sides of length $2^{N}+1$, so that each sub-square has an exact middle lying on a gridpoint. Given a heightfield,
-		\begin{equation}
-		T = \left[ \begin{matrix}
+ \item Given a heightfield,
+		$T = \left[ \begin{matrix}
 		T_{0,0} & \ldots & T_{0,2^{N},} \\
 		\vdots  &  \ddots & \vdots \\
 		T_{2^{N},0} & \ldots & T_{2^{N},2^{N}}
-		\end{matrix} \right]
-		\end{equation}
- \item then for midpoints along columns,
-		\begin{equation}
-			T_{k \cdot 2^{n},j \cdot 2^{n}} = \frac{T_{(k+1) \cdot 2^{n},j \cdot 2^{n}} + T_{(k-1) \cdot 2^{n},j \cdot 2^{n}}}{2} + A \cdot R \cdot 2^{-H \cdot n}
-		\end{equation}
- \item and similarly, for midpoints along rows,
-		\begin{equation}
-			T_{j \cdot 2^{n},k \cdot 2^{n}} = \frac{T_{j \cdot 2^{n},(k+1) \cdot 2^{n}} + T_{j \cdot 2^{n},(k-1) \cdot 2^{n}}}{2} + A \cdot R \cdot 2^{-H \cdot n}
-		.\end{equation}
- \item Whereas midpoints centered between corners are given by
-				\begin{equation}
-			T_{k \cdot 2^{n},k' \cdot 2^{n}} = \frac{T_{(k-1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k-1) \cdot 2^{n},(k'+1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'+1) \cdot 2^{n}}}{4} + A \cdot R \cdot 2^{-H \cdot n}
-		.\end{equation}
- \item (where
-		\begin{equation}
-			k,k' \in \left\{ 1, 3, \cdots, 2^{N-n}-1 \right\}
-		\end{equation}
-and
-		\begin{equation}
-			m \in \left\{ 0, 2, \cdots, 2^{N-n} \right\}
-		\end{equation})
-for $n < N$ and $l,m \in \mathbb{Z}$.
-
- \item H is a smoothing parameter, A is an amplitude parameter, and R is a random number from a uniform distribution between -1 and 1.
-
+		\end{matrix} \right]$
+ \item Recurrence relations for midpoints:
+	%\begin{itemize}
+		\item along columns
+		
+		$T_{k \cdot 2^{n},j \cdot 2^{n}} = \frac{T_{(k+1) \cdot 2^{n},j \cdot 2^{n}} + T_{(k-1) \cdot 2^{n},j \cdot 2^{n}}}{2} + A \cdot R \cdot 2^{-H \cdot n}$,
+		\item along rows
+		
+		$T_{j \cdot 2^{n},k \cdot 2^{n}} = \frac{T_{j \cdot 2^{n},(k+1) \cdot 2^{n}} + T_{j \cdot 2^{n},(k-1) \cdot 2^{n}}}{2} + A \cdot R \cdot 2^{-H \cdot n}$,
+		\item and between corners
+		
+		$T_{k \cdot 2^{n},k' \cdot 2^{n}} = \left(\frac{1}{4}\right)T_{(k-1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + \left(\frac{1}{4}\right)T_{(k-1) \cdot 2^{n},(k'+1) \cdot 2^{n}} + \left(\frac{1}{4}\right)T_{(k+1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + \left(\frac{1}{4}\right)T_{(k+1) \cdot 2^{n},(k'+1) \cdot 2^{n}} + A \cdot R \cdot 2^{-H \cdot n}$
+	%\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -265,7 +258,6 @@ for $n < N$ and $l,m \in \mathbb{Z}$.
 \end{frame}
 
 
-
 \begin{frame}
  \frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape}
 \begin{itemize}
@@ -293,6 +285,9 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \item Fractal landscape with smooth rolling features rather than ridges and peaks.
 \item Terrain can be tiled using this method.
 \end{itemize}
+\begin{center}
+\includegraphics[scale=0.3]{FourierLandscape.jpg}
+\end{center}
 \end{frame}
 
 \subsection{Multifractal Method}
@@ -302,8 +297,8 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{itemize}
 \item Very new technique
 \item This technique has, so far, has mostly been used to extract information for images of natural terrain. 
-\item The multi fractal technique uses four parameters to create a generated landscape: $alpha$, $C1$ $S$, and $R$. 
-\item $alpha$ is the parameter that is used to determine the occurrence of peaks or singularities in the terrain. $C1$ is the parameter that controls the spareness of the mean terrain height, or more simply put the roughness of the terrain. $S$ is used as a seed (an initial number) for the random number generator. Lastly, $R$ is for the square resolute of the terrain surface.
+\item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C1$ $S$, and $R$. 
+\item $\alpha$ is the parameter that is used to determine the occurrence of peaks or singularities in the terrain. $C1$ is the parameter that controls the spareness of the mean terrain height, or more simply put the roughness of the terrain. $S$ is used as a seed (an initial number) for the random number generator. Lastly, $R$ is for the square resolute of the terrain surface.
 \item This technique uses a turbulent discrete cascade model. This model was originally used to model fluid flows. It applies the idea of singularities, which are sudden changes in the behavior of the turbulence, and applies it to the terrain. In a terrain, singularities can be modeled as mountain peaks
 \end{itemize}
 \end{frame}
@@ -336,8 +331,8 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{frame}
  \frametitle{Current Research}
 \begin{itemize}
- \item ??
-\item ??
+ \item Multifractal Technique
+\item 
 \end{itemize}
 \end{frame}
 
