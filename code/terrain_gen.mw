@@ -98,52 +98,151 @@
 </Group>
 <Group labelreference="L3" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">MidpointAlgo := proc (tdata, xsi, xfi, ysi, yfi, params) local q, endpoints, xs, xf, ys, yf, errscale, smoothing:errscale := params[1]: smoothing := params[2]:q := SimpleQueue([xsi, xfi, ysi, yfi]):while not q:-empty() do endpoints := q:-dequeue():xs, xf, ys, yf := seq(endpoints[i], i = 1 .. 4): tdata[(1/2)*xf+(1/2)*xs, ys] := (1/2)*tdata[xs, ys]+(1/2)*tdata[xf, ys]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):tdata[(1/2)*xf+(1/2)*xs, yf] := (1/2)*tdata[xs, yf]+(1/2)*tdata[xf, yf]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)): tdata[xs, (1/2)*yf+(1/2)*ys] := (1/2)*tdata[xs, ys]+(1/2)*tdata[xs, yf]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):tdata[xf, (1/2)*yf+(1/2)*ys] := (1/2)*tdata[xf, ys]+(1/2)*tdata[xf, yf]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xf, ys]+(1/4)*tdata[xf, yf]+(1/4)*tdata[xs, ys]+(1/4)*tdata[xs, yf]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):if 3 &lt;= xf-xs then q:-enqueue([xs, (1/2)*xf+(1/2)*xs, ys, (1/2)*yf+(1/2)*ys]):q:-enqueue([(1/2)*xf+(1/2)*xs, xf, ys, (1/2)*yf+(1/2)*ys]):q:-enqueue([xs, (1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys, yf]):q:-enqueue([(1/2)*xf+(1/2)*xs, xf, (1/2)*yf+(1/2)*ys, yf]):end if:end do:tdata;end proc:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">MidpointAlgo := proc (tdata, xsi, xfi, ysi, yfi, params) 
+local q, endpoints, xs, xf, ys, yf, errscale, smoothing:
+errscale := params[1]: 
+smoothing := params[2]:
+q := SimpleQueue([xsi, xfi, ysi, yfi]):
+while not q:-empty() do 
+endpoints := q:-dequeue():
+xs, xf, ys, yf := seq(endpoints[i], i = 1 .. 4): 
+tdata[(1/2)*xf+(1/2)*xs, ys] := (1/2)*tdata[xs, ys]+(1/2)*tdata[xf, ys]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):
+tdata[(1/2)*xf+(1/2)*xs, yf] := (1/2)*tdata[xs, yf]+(1/2)*tdata[xf, yf]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)): 
+tdata[xs, (1/2)*yf+(1/2)*ys] := (1/2)*tdata[xs, ys]+(1/2)*tdata[xs, yf]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):
+tdata[xf, (1/2)*yf+(1/2)*ys] := (1/2)*tdata[xf, ys]+(1/2)*tdata[xf, yf]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):
+tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xf, ys]+(1/4)*tdata[xf, yf]+(1/4)*tdata[xs, ys]+(1/4)*tdata[xs, yf]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):
+if 3 &lt;= xf-xs then 
+q:-enqueue([xs, (1/2)*xf+(1/2)*xs, ys, (1/2)*yf+(1/2)*ys]):
+q:-enqueue([(1/2)*xf+(1/2)*xs, xf, ys, (1/2)*yf+(1/2)*ys]):
+q:-enqueue([xs, (1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys, yf]):
+q:-enqueue([(1/2)*xf+(1/2)*xs, xf, (1/2)*yf+(1/2)*ys, yf]):
+end if:
+end do:
+tdata;
+end proc:</Text-field>
 </Input>
 </Group>
 <Group labelreference="L55" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">DiamondsAndSquaresAlgo := proc (tdata, xsi, xfi, ysi, yfi, params)local q, endpoints, xs, xf, ys, yf, tdim, xm, ym, errscale, smoothing:errscale := params[1]:smoothing := params[2]:tdim := ArrayDims(tdata):xm := rhs(tdim[1]):ym := rhs(tdim[2]):q := SimpleQueue([xsi, xfi, ysi, yfi]):while not q:-empty() doendpoints := q:-dequeue():xs, xf, ys, yf := seq(endpoints[i], i = 1 .. 4):tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xf, ys]+(1/4)*tdata[xf, yf]+(1/4)*tdata[xs, ys]+(1/4)*tdata[xs, yf]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):tdata[(1/2)*xf+(1/2)*xs, ys] := (1/4)*tdata[xs, ys]+(1/4)*tdata[xf, ys]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, wrapto((3/2)*ys-(1/2)*yf, ym)]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):tdata[(1/2)*xf+(1/2)*xs, yf] := (1/4)*tdata[xs, yf]+(1/4)*tdata[xf, yf]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, wrapto((3/2)*yf-(1/2)*ys, ym)]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):tdata[xs, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xs, ys]+(1/4)*tdata[xs, yf]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[wrapto((3/2)*xs-(1/2)*xf, xm), (1/2)*yf+(1/2)*ys]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):tdata[xf, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xf, ys]+(1/4)*tdata[xf, yf]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[wrapto((3/2)*xf-(1/2)*xs, xm), (1/2)*yf+(1/2)*ys]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):if 3 &lt;= xf-xs thenq:-enqueue([xs, (1/2)*xf+(1/2)*xs, ys, (1/2)*yf+(1/2)*ys]):q:-enqueue([(1/2)*xf+(1/2)*xs, xf, ys, (1/2)*yf+(1/2)*ys]):q:-enqueue([xs, (1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys, yf]):q:-enqueue([(1/2)*xf+(1/2)*xs, xf, (1/2)*yf+(1/2)*ys, yf]):end if:end do:tdata;end proc:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">DiamondsAndSquaresAlgo := proc (tdata, xsi, xfi, ysi, yfi, params)
+local q, endpoints, xs, xf, ys, yf, tdim, xm, ym, errscale, smoothing:
+errscale := params[1]:
+smoothing := params[2]:
+tdim := ArrayDims(tdata):
+xm := rhs(tdim[1]):
+ym := rhs(tdim[2]):
+q := SimpleQueue([xsi, xfi, ysi, yfi]):
+while not q:-empty() do
+endpoints := q:-dequeue():
+xs, xf, ys, yf := seq(endpoints[i], i = 1 .. 4):
+tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xf, ys]+(1/4)*tdata[xf, yf]+(1/4)*tdata[xs, ys]+(1/4)*tdata[xs, yf]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):
+tdata[(1/2)*xf+(1/2)*xs, ys] := (1/4)*tdata[xs, ys]+(1/4)*tdata[xf, ys]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, wrapto((3/2)*ys-(1/2)*yf, ym)]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):
+tdata[(1/2)*xf+(1/2)*xs, yf] := (1/4)*tdata[xs, yf]+(1/4)*tdata[xf, yf]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, wrapto((3/2)*yf-(1/2)*ys, ym)]+errscale*2^(-smoothing*(N-log[2](xf-xs)))*Generate(float(range = -1 .. 1)):
+tdata[xs, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xs, ys]+(1/4)*tdata[xs, yf]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[wrapto((3/2)*xs-(1/2)*xf, xm), (1/2)*yf+(1/2)*ys]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):
+tdata[xf, (1/2)*yf+(1/2)*ys] := (1/4)*tdata[xf, ys]+(1/4)*tdata[xf, yf]+(1/4)*tdata[(1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys]+(1/4)*tdata[wrapto((3/2)*xf-(1/2)*xs, xm), (1/2)*yf+(1/2)*ys]+errscale*2^(-smoothing*(N-log[2](yf-ys)))*Generate(float(range = -1 .. 1)):
+if 3 &lt;= xf-xs then
+q:-enqueue([xs, (1/2)*xf+(1/2)*xs, ys, (1/2)*yf+(1/2)*ys]):
+q:-enqueue([(1/2)*xf+(1/2)*xs, xf, ys, (1/2)*yf+(1/2)*ys]):
+q:-enqueue([xs, (1/2)*xf+(1/2)*xs, (1/2)*yf+(1/2)*ys, yf]):
+q:-enqueue([(1/2)*xf+(1/2)*xs, xf, (1/2)*yf+(1/2)*ys, yf]):
+end if:
+end do:
+tdata;
+end proc:</Text-field>
 </Input>
 </Group>
 <Group labelreference="L89" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">FourierAlgo := proc (tdata, xsi, xfi, ysi, yfi, params)local smoothexp, TerrainData, x, y, f:smoothexp := params[1]:TerrainData := Array(xsi .. xfi-1, ysi .. yfi-1, readonly = false):for x from xsi to xfi-1 dofor y from ysi to yfi-1 doTerrainData[x, y] := Generate(distribution(Normal(0, (1/12)*xfi))):end do:end do:FourierTransform(TerrainData, inplace = true, algorithm = mintime):for x from xsi to xfi-1 dofor y from ysi to yfi-1 dof := sqrt(x^2+y^2):TerrainData[x, y] := TerrainData[x, y]/f^smoothexp:end do:end do:InverseFourierTransform(TerrainData, inplace = true, algorithm = mintime):for x from xsi to xfi-1 dofor y from ysi to yfi-1 doTerrainData[x, y] := Re(TerrainData[x, y]):end do:end do:TerrainData*xfi*exp(1+(1/2)*smoothexp);end proc:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">FourierAlgo := proc (tdata, xsi, xfi, ysi, yfi, params)
+local smoothexp, TerrainData, x, y, f:
+smoothexp := params[1]:
+TerrainData := Array(xsi .. xfi-1, ysi .. yfi-1, readonly = false):
+for x from xsi to xfi-1 do
+for y from ysi to yfi-1 do
+TerrainData[x, y] := Generate(distribution(Normal(0, (1/12)*xfi))):
+end do:
+end do:
+FourierTransform(TerrainData, inplace = true, algorithm = mintime):
+for x from xsi to xfi-1 do
+for y from ysi to yfi-1 do
+f := sqrt(x^2+y^2):
+TerrainData[x, y] := TerrainData[x, y]/f^smoothexp:
+end do:
+end do:
+InverseFourierTransform(TerrainData, inplace = true, algorithm = mintime):
+for x from xsi to xfi-1 do
+for y from ysi to yfi-1 do
+TerrainData[x, y] := Re(TerrainData[x, y]):
+end do:
+end do:
+TerrainData*xfi*exp(1+(1/2)*smoothexp);
+end proc:</Text-field>
 </Input>
 </Group>
 <Group labelreference="L85" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">MultiplyTerrains := proc (tdata, xsi, xfi, ysi, yfi, params)local x, y, n, tmp:n := nops(params):for x from xsi to xfi dofor y from ysi to yfi dotmp := product(params[i][x, y], i = 1 .. n):tdata[x, y] := signum(tmp)*abs(tmp)^(1/n):end do:end do:tdata;end proc:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">MultiplyTerrains := proc (tdata, xsi, xfi, ysi, yfi, params)
+local x, y, n, tmp:
+n := nops(params):
+for x from xsi to xfi do
+for y from ysi to yfi do
+tmp := product(params[i][x, y], i = 1 .. n):
+tdata[x, y] := signum(tmp)*abs(tmp)^(1/n):
+end do:
+end do:
+tdata;
+end proc:</Text-field>
 </Input>
 </Group>
 <Group labelreference="L71" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">MakeTerrain := proc (seed, N, Algo, params)local TSIZE, TerrainData, hbound:SetState(state = seed):TSIZE := 1+2^N:hbound := (1/4)*TSIZE:TerrainData := Array(1 .. TSIZE, 1 .. TSIZE, 0, readonly = false):TerrainData[1, 1] := Generate(float(range = -hbound .. hbound)):TerrainData[1, TSIZE] := Generate(float(range = -hbound .. hbound)):TerrainData[TSIZE, 1] := Generate(float(range = -hbound .. hbound)):TerrainData[TSIZE, TSIZE] := Generate(float(range = -hbound .. hbound)):Algo(TerrainData, 1, TSIZE, 1, TSIZE, params);end proc:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">MakeTerrain := proc (seed, N, Algo, params)
+local TSIZE, TerrainData, hbound:
+SetState(state = seed):
+TSIZE := 1+2^N:
+hbound := (1/4)*TSIZE:
+TerrainData := Array(1 .. TSIZE, 1 .. TSIZE, 0, readonly = false):
+TerrainData[1, 1] := Generate(float(range = -hbound .. hbound)):
+TerrainData[1, TSIZE] := Generate(float(range = -hbound .. hbound)):
+TerrainData[TSIZE, 1] := Generate(float(range = -hbound .. hbound)):
+TerrainData[TSIZE, TSIZE] := Generate(float(range = -hbound .. hbound)):
+Algo(TerrainData, 1, TSIZE, 1, TSIZE, params);
+end proc:</Text-field>
 </Input>
 </Group>
 <Group labelreference="L43" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">N := 6:TSIZE := 1+2^N:</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">N := 7:
+TSIZE := 1+2^N:</Text-field>
 </Input>
 </Group>
 <Group labelreference="L48" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">mids := MakeTerrain(1234, N, MidpointAlgo, [15, 1]):surfdata(mids, 1 .. TSIZE, 1 .. TSIZE, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">mids := MakeTerrain(1234, N, MidpointAlgo, [30, 1]):
+surfdata(mids, 1 .. TSIZE, 1 .. TSIZE, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
 </Input>
 </Group>
 <Group labelreference="L41" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">dands := MakeTerrain(1234, N, DiamondsAndSquaresAlgo, [15, 1]):surfdata(dands, 1 .. TSIZE, 1 .. TSIZE, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">dands := MakeTerrain(1234, N, DiamondsAndSquaresAlgo, [30, 1]):
+surfdata(dands, 1 .. TSIZE, 1 .. TSIZE, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
 </Input>
 </Group>
 <Group labelreference="L84" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">combo := MakeTerrain(1234, N, MultiplyTerrains, [mids, dands]):surfdata(combo, 1 .. TSIZE, 1 .. TSIZE, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">combo := MakeTerrain(1234, N, MultiplyTerrains, [mids, dands]):
+surfdata(combo, 1 .. TSIZE, 1 .. TSIZE, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
 </Input>
 </Group>
 <Group labelreference="L87" drawlabel="true">
 <Input>
-<Text-field prompt="&gt; " style="Maple Input" layout="Normal">fours := MakeTerrain(1234, N, FourierAlgo, [2.8]):surfdata(fours, 1 .. TSIZE-1, 1 .. TSIZE-1, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal">fours := MakeTerrain(1234, N, FourierAlgo, [2.8]):
+surfdata(fours, 1 .. TSIZE-1, 1 .. TSIZE-1, shading = zhue, scaling = constrained, glossiness = .5, axes = normal, lightmodel = light3, style = patchcontour);</Text-field>
+</Input>
+</Group>
+<Group labelreference="L94" drawlabel="true">
+<Input>
+<Text-field prompt="&gt; " style="Maple Input" layout="Normal"><Equation executable="true" style="2D Input" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
 </Input>
 </Group>
 </Worksheet>
