@@ -200,7 +200,7 @@
 \begin{frame}
 \frametitle{Our Midpoint Displacement}
 \begin{itemize}
- \item Given a heightfield,
+ \item 	Generating fractal terrains by midpoint displacement is a relatively straightforward method for generating artificial terrain with realistic features. The dimensions of the terrain must be a square with sides of length $2^{N}+1$, so that each sub-square has an exact middle lying on a gridpoint. Given a heightfield,
 		\begin{equation}
 		T = \left[ \begin{matrix}
 		T_{0,0} & \ldots & T_{0,2^{N},} \\
@@ -208,14 +208,29 @@
 		T_{2^{N},0} & \ldots & T_{2^{N},2^{N}}
 		\end{matrix} \right]
 		\end{equation}
-then,
+ \item then for midpoints along columns,
 		\begin{equation}
-			T_{k \times 2^{n},0} = \frac{T_{(k+1) \times 2^{n},0} + T_{(k-1) \times 2^{n},0}}{2} + A \times R \times 2^{-H \times n}
+			T_{k \cdot 2^{n},j \cdot 2^{n}} = \frac{T_{(k+1) \cdot 2^{n},j \cdot 2^{n}} + T_{(k-1) \cdot 2^{n},j \cdot 2^{n}}}{2} + A \cdot R \cdot 2^{-H \cdot n}
 		\end{equation}
-where
+ \item and similarly, for midpoints along rows,
 		\begin{equation}
-			k \equiv (2 \times l)+1 \pmod{2^{N-n}}
+			T_{j \cdot 2^{n},k \cdot 2^{n}} = \frac{T_{j \cdot 2^{n},(k+1) \cdot 2^{n}} + T_{j \cdot 2^{n},(k-1) \cdot 2^{n}}}{2} + A \cdot R \cdot 2^{-H \cdot n}
+		.\end{equation}
+ \item Whereas midpoints centered between corners are given by
+				\begin{equation}
+			T_{k \cdot 2^{n},k' \cdot 2^{n}} = \frac{T_{(k-1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k-1) \cdot 2^{n},(k'+1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'+1) \cdot 2^{n}}}{4} + A \cdot R \cdot 2^{-H \cdot n}
+		.\end{equation}
+ \item (where
+		\begin{equation}
+			k,k' \in \left\{ 1, 3, \cdots, 2^{N-n}-1 \right\}
 		\end{equation}
+and
+		\begin{equation}
+			m \in \left\{ 0, 2, \cdots, 2^{N-n} \right\}
+		\end{equation})
+for $n < N$ and $l,m \in \mathbb{Z}$.
+
+ \item H is a smoothing parameter, A is an amplitude parameter, and R is a random number from a uniform distribution between -1 and 1.
 
 \end{itemize}
 \end{frame}
