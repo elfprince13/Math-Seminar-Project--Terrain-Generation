@@ -249,29 +249,28 @@
 \subsection{Terrain Generation Using The Fast Fourier Transform}
 
 \begin{frame}
- \frametitle{Fast Fourier Transform in Generating Fractal Terrain}
-\begin{itemize}
-\item Not an iterative process
-\item Enables us to express random noise as a function of sine and cosine functions
-\item Converts the function to a frequency domain 
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}
  \frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape}
 \begin{itemize}
-\item Begin using a random Gaussian noise (other types of noise can be used here as well)
+\item Not an iterative process
+\item Begin using a random Gaussian noise
 \item This is a two dimensional grid of discrete random values. 
-\item Apply the fast Fourier transform (FFT), which preforms a discrete Fourier transform (DFT). A two dimensional discrete Fourier transform for and "$N$x$M$ grid in $x$ and $y$ is 
-	$$F(u,v)=1/NM\displaystyle\sum\limits_{x=0}^{N-1} \displaystyle\sum\limits_{y=0}^{M-1} f(x,y)e^{-2\pi i(xu/N+yu/M)},$$
-\item The FFT allows us to decompose the random noise into the sum of the sine and cosine functions and convert magnitudes into the frequency domain. 
+\item Apply the fast Fourier transform (FFT)
 \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape}
+\frametitle{Fast Fourier Transform}
 \begin{itemize}
+\item The Fast Fourier Transform performs the discrete Fourier transform (DFT). 
+\item A two dimensional discrete Fourier transform for and "$N$x$M$ grid in $x$ and $y$ is 
+	$$F(u,v)=1/NM\displaystyle\sum\limits_{x=0}^{N-1} \displaystyle\sum\limits_{y=0}^{M-1} f(x,y)e^{-2\pi i(xu/N+yu/M)}$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape (cont.)}
+\begin{itemize}
+\item The FFT allows us to decompose the random noise into the sum of the sine and cosine functions and convert magnitudes into the frequency domain. 
 \item We scale these frequencies using a frequency filter of the form $1/fr$.
 \item Apply an inverse fast Fourier transform
 $$f(x,y)=\displaystyle\sum\limits_{u=0}^{N-1} \displaystyle\sum\limits_{v=0}^{M-1} F(u,v)e^{2\pi i(xu/N+yv/M)}.$$ 
