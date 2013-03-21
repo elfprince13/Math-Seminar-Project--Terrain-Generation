@@ -42,7 +42,8 @@
 \usepackage[T1]{fontenc}
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
-
+\usepackage{caption}
+\usepackage{subcaption}
 
 \title[Techniques for Fractal Terrain Generation] % (optional, use only with long paper titles)
 {Techniques for Fractal Terrain Generation}
@@ -228,6 +229,12 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Terrain Generated Using Midpoint Displacement}
+\begin{center}
+\includegraphics[scale=0.37]{midpoints.jpg}
+\end{center}
+\end{frame}
 
 \begin{frame}
  \frametitle{Diamond Square Algorthim}
@@ -236,6 +243,13 @@
 \item Midpoint Displacement sometimes leaves square-shaped artifacts in the terrain. 
 \item The Diamonds and Squares method attempts to alleviate this by alternating calculated values to square and diamond patterned midpoints. 
 \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Terrain Generated Using Diamonds Square Algorithm}
+\begin{center}
+\includegraphics[scale=0.33]{diamondsandsquares.jpg}
+\end{center}
 \end{frame}
 
 \begin{frame}
@@ -255,6 +269,9 @@
 \item Begin using a random Gaussian noise
 \item This is a two dimensional grid of discrete random values. 
 \item Apply the fast Fourier transform (FFT)
+\begin{center}
+\includegraphics[scale=0.3]{fft2d.jpg}
+\end{center}
 \end{itemize}
 \end{frame}
 
@@ -270,8 +287,23 @@
 \begin{frame}
 \frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape (cont.)}
 \begin{itemize}
-\item The FFT allows us to decompose the random noise into the sum of the sine and cosine functions and convert magnitudes into the frequency domain. 
+\item The FFT decomposes the random noise into the sum of the sine and cosine functions and converts magnitudes into frequency domain
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.17]{fft3d.jpg}
+\end{center}
+\begin{itemize}
 \item We scale these frequencies using a frequency filter of the form $1/fr$.
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.2]{filter2d.jpg}
+\includegraphics[scale=0.2]{filter3d.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape (cont.)}
+\begin{itemize}
 \item Apply an inverse fast Fourier transform
 $$f(x,y)=\displaystyle\sum\limits_{u=0}^{N-1} \displaystyle\sum\limits_{v=0}^{M-1} F(u,v)e^{2\pi i(xu/N+yv/M)}.$$ 
 in order to generate a fractal landscape that is the sum of the waves at different frequencies. 
@@ -286,6 +318,7 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \end{itemize}
 \begin{center}
 \includegraphics[scale=0.3]{FourierLandscape.jpg}
+
 \end{center}
 \end{frame}
 
@@ -339,12 +372,14 @@ in order to generate a fractal landscape that is the sum of the waves at differe
   \begin{itemize}
     \item Multiplication Technique
     \begin{itemize}
-    \item The technique looks into creating a landscape that looks more realistic than the ones created by the Fourier Transform method and the Diamond-Square Method.
-    \item This is done by multiplying two terrains created by the methods above, making sure that the altitudes of these two landscapes are between 0 and 1. 
-    \item This multiplication step will result in a new landscape that has smoother valleys and rougher peaks.
+    \item Creates a landscape that looks more realistic 
+    \item Done by multiplying two terrains created by the methods above
+    \item Multiplication will result in a new landscape with smoother valleys and rougher peaks.
     \end{itemize}
-    \item ???
     \end{itemize}
+    \begin{center}
+    \includegraphics[scale=0.2]{multipliedterrain.jpg}
+    \end{center}
 \end{frame}
 
 \begin{frame}
