@@ -42,7 +42,8 @@
 \usepackage[T1]{fontenc}
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
-
+\usepackage{caption}
+\usepackage{subcaption}
 
 \title[Techniques for Fractal Terrain Generation] % (optional, use only with long paper titles)
 {Techniques for Fractal Terrain Generation}
@@ -255,6 +256,9 @@
 \item Begin using a random Gaussian noise
 \item This is a two dimensional grid of discrete random values. 
 \item Apply the fast Fourier transform (FFT)
+\begin{center}
+\includegraphics[scale=0.3]{fft2d.jpg}
+\end{center}
 \end{itemize}
 \end{frame}
 
@@ -270,8 +274,23 @@
 \begin{frame}
 \frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape (cont.)}
 \begin{itemize}
-\item The FFT allows us to decompose the random noise into the sum of the sine and cosine functions and convert magnitudes into the frequency domain. 
+\item The FFT decomposes the random noise into the sum of the sine and cosine functions and converts magnitudes into frequency domain
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.17]{fft3d.jpg}
+\end{center}
+\begin{itemize}
 \item We scale these frequencies using a frequency filter of the form $1/fr$.
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.2]{filter2d.jpg}
+\includegraphics[scale=0.2]{filter3d.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{How the Fast Fourier Transform Works in Generating Fractal Landscape (cont.)}
+\begin{itemize}
 \item Apply an inverse fast Fourier transform
 $$f(x,y)=\displaystyle\sum\limits_{u=0}^{N-1} \displaystyle\sum\limits_{v=0}^{M-1} F(u,v)e^{2\pi i(xu/N+yv/M)}.$$ 
 in order to generate a fractal landscape that is the sum of the waves at different frequencies. 
@@ -286,6 +305,7 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \end{itemize}
 \begin{center}
 \includegraphics[scale=0.3]{FourierLandscape.jpg}
+
 \end{center}
 \end{frame}
 
