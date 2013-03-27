@@ -190,7 +190,7 @@
  \item Relatively straightforward
  \item Realistic features
 \item Begin with a line between two points.
-\item The midpoint of this line this then displaced by some random amount in a vertical direction.
+\item The midpoint of this line is then displaced by some random amount in a vertical direction.
 \item The midpoints of these two new line segments are then displaced by a random amount in the vertical direction.
 \item Repeat until you have reached desired level of detail.
 \end{itemize}
@@ -333,10 +333,10 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{itemize}
 \item Very new technique
 \item This technique has, so far, has mostly been used to extract information for images of natural terrain. 
-\item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C1$ $S$, and $R$. 
+\item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C_{1}$ $S$, and $R$. 
 \begin{itemize}
 \item The first variable, $\alpha$, is used to determine the occurrence of peaks or singularities throughout the terrain.
-\item The second variable, $C1$, is used to contrail the roughness of the terrain
+\item The second variable, $C_{1}$, is used to contrail the roughness of the terrain
 \item The third variable, $S$, is the random number (seed) generator
 \item The last variable, $R$, is the square resolution of the terrain surface.
 \end{itemize}
@@ -350,7 +350,7 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \item There are four different stages in creating a multi-fractal generated terrain:
 \begin{itemize}
 \item The first stage is to generate a Levy noise field with a certain $\alpha$
-\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function $K(q)$
+\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function
 \item The third stage is to exponentiate and normalize the output of stage two
 \item The fourth and final stage is to fractal integrate the multi-fractal field
 \end{itemize}
@@ -364,10 +364,10 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{itemize}
 \item $\alpha$ ranges between 0 and 2 
 \end{itemize}
-\item The second stage is to filter the output of stage one to get a multi-scaling behavior according to the characteristic function $K(q)$
+\item The second stage is to filter the output of stage one to get a multi-scaling behavior according to the characteristic function: $K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$
 \begin{itemize}
 \item This is done by taking the grid of normalized noises $S(\alpha)$ from stage one and transform it to the Fourier domain using a Fast Fourier Transformation.
-\item Then to obtain the multi-scaling behavior, the transformed $S(\alpha)$ is weighted with a factor 
+\item Then to obtain the multi-scaling behavior, the transformed $S(\alpha)$ is weighted with a factor and then bounded. 
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -377,8 +377,9 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{itemize}
 \item The third stage is to exponentiate and normalize the output of stage two to obtain a multifractal field.
 \begin{itemize}
-\item
+\item  
 \end{itemize}
+\item The fourth stage is to fractal integrate the multi-fractal field to obtain the final landscape
 \end{itemize}
 \end{frame}
 
@@ -387,7 +388,7 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{frame}
  \frametitle{Conclusion}
 \begin{itemize}
-  \item Best method seems to be Diamond Square algorithm, as it produces the most realistic landscape through random generation.
+  \item The standard method seems to be Diamond Square algorithm, as it produces the fairly realistic landscape through random generation.
   \item The fast Fourier transform allows for flatter terrain generation and the ability to tile
  \item Newest method is the Multifractal Technique which uses images of real terrain to generate terrain with very accurate features
   \end{itemize}
@@ -408,17 +409,6 @@ in order to generate a fractal landscape that is the sum of the waves at differe
     \includegraphics[scale=0.2]{multipliedterrain.jpg}
     \end{center}
 \end{frame}
-
-\begin{frame}
- \frametitle{Current Research}
-\begin{itemize}
- \item Multifractal Technique
-\item 
-\end{itemize}
-\end{frame}
-
-
-
 
 
 \begin{frame}
