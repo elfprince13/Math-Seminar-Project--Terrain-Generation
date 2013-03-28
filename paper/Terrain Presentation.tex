@@ -363,10 +363,11 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \item The first stage is generating a Levy noise field, with a certain $\alpha$
 \begin{itemize}
 \item $\alpha$ ranges between 0 and 2 
+\item This results in a field of normalized noises, $S(\alpha)$
 \end{itemize}
 \item The second stage is to filter the output of stage one to get a multi-scaling behavior according to the characteristic function: $K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$
 \begin{itemize}
-\item This is done by taking the grid of normalized noises $S(\alpha)$ from stage one and transform it to the Fourier domain using a Fast Fourier Transformation.
+\item This is done by taking the grid, $S(\alpha)$ from stage one, and transforming it to the Fourier domain using a Fast Fourier Transformation.
 \item Then to obtain the multi-scaling behavior, the transformed $S(\alpha)$ is weighted with a factor and then bounded. 
 \end{itemize}
 \end{itemize}
