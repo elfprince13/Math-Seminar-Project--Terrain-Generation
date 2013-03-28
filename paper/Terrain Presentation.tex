@@ -333,12 +333,12 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{itemize}
 \item Very new technique
 \item This technique has, so far, has mostly been used to extract information for images of natural terrain. 
-\item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C_{1}$ $S$, and $R$. 
+\item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C_{1}$ $S$, and $H$. 
 \begin{itemize}
 \item The first variable, $\alpha$, is used to determine the occurrence of peaks or singularities throughout the terrain.
-\item The second variable, $C_{1}$, is used to contrail the roughness of the terrain
+\item The second variable, $C_{1}$, is used to contrail the sparseness, or roughness, of the terrain.
 \item The third variable, $S$, is the random number (seed) generator
-\item The last variable, $R$, is the square resolution of the terrain surface.
+\item The last variable, $H$, is the parameter that controls how smooth the terrain is.
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -377,9 +377,12 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{itemize}
 \item The third stage is to exponentiate and normalize the output of stage two to obtain a multifractal field.
 \begin{itemize}
-\item  
+\item  This is done using
 \end{itemize}
 \item The fourth stage is to fractal integrate the multi-fractal field to obtain the final landscape
+\begin{itemize}
+\item This is controlled by the H parameter, $\beta = 2H+1$
+\end{itemize}
 \end{itemize}
 \end{frame}
 
