@@ -331,58 +331,27 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{frame}
  \frametitle{Multifractal Technique}
 \begin{itemize}
-\item Very new technique
-\item This technique has, so far, has mostly been used to extract information for images of natural terrain. 
-\item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C_{1}$ $S$, and $H$. 
+\item Very new technique 
+\item The multi fractal technique uses four parameters to create a generated landscape: 
 \begin{itemize}
-\item The first variable, $\alpha$, is used to determine the occurrence of peaks or singularities throughout the terrain.
-\item The second variable, $C_{1}$, is used to contrail the sparseness, or roughness, of the terrain.
-\item The third variable, $S$, is the random number (seed) generator
-\item The last variable, $H$, is the parameter that controls how smooth the terrain is.
-\end{itemize}
+\item $\alpha$ 
+\item $C_{1}$
+\item $S$
+\item $H$
+\end{itemize} 
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}
-\frametitle{Multifractal Technique (cont.)}
-\begin{itemize}
-\item There are four different stages in creating a multi-fractal generated terrain:
-\begin{itemize}
-\item The first stage is to generate a Levy noise field with a certain $\alpha$
-\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function
-\item The third stage is to exponentiate and normalize the output of stage two
-\item The fourth and final stage is to fractal integrate the multi-fractal field
-\end{itemize}
-\end{itemize}
-\end{frame}
 
 \begin{frame}
 \frametitle{How the Multifractal Technique Works in Generating Fractal Landscape}
 \begin{itemize}
-\item The first stage is generating a Levy noise field, with a certain $\alpha$
+\item There are four different stages in creating a multi-fractal generated terrain:
 \begin{itemize}
-\item $\alpha$ ranges between 0 and 2 
-\item This results in a field of normalized noises, $S(\alpha)$
-\end{itemize}
-\item The second stage is to filter the output of stage one to get a multi-scaling behavior according to the characteristic function: $K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$
-\begin{itemize}
-\item This is done by taking the grid, $S(\alpha)$ from stage one, and transforming it to the Fourier domain using a Fast Fourier Transformation.
-\item Then to obtain the multi-scaling behavior, the transformed $S(\alpha)$ is weighted with a factor and then bounded. 
-\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}
-\frametitle{How the Multifractal Technique Works in Generating Fractal Landscape (cont)}
-\begin{itemize}
-\item The third stage is to exponentiate and normalize the output of stage two to obtain a multifractal field.
-\begin{itemize}
-\item  This is done using
-\end{itemize}
-\item The fourth stage is to fractal integrate the multi-fractal field to obtain the final landscape
-\begin{itemize}
-\item This is controlled by the H parameter, $\beta = 2H+1$
+\item The first stage is to generate a Levy noise field with a certain $\alpha$
+\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function: $K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$
+\item The third stage is to exponentiate and normalize the output of stage two
+\item The fourth and final stage is to fractal integrate the multi-fractal field
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -412,6 +381,13 @@ in order to generate a fractal landscape that is the sum of the waves at differe
     \begin{center}
     \includegraphics[scale=0.2]{multipliedterrain.jpg}
     \end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Applications}
+\begin{itemize}
+\item F
+\end{itemize}
 \end{frame}
 
 
