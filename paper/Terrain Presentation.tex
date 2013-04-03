@@ -250,19 +250,15 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Terrain Generated Using Diamonds Square Algorithm}
+\frametitle{Benefits of using the Diamond Square Algorithm and Midpoint Displacement Algorithm}
+\begin{itemize}
+\item Both the Midpoint Displacement and the Diamond Square Algorithm run in linear time compared to the Fourier transformation which runs in NlogN time.
+\end{itemize}
 \begin{center}
-\includegraphics[scale=0.33]{diamondsandsquares.jpg}
+\includegraphics[scale=0.23]{diamondsandsquares.jpg}
 \end{center}
 \end{frame}
 
-\begin{frame}
-\frametitle{Uses and Benefits of the Midpoint Displacement and Diamond Square Algorithms}
-\begin{itemize}
-\item Both the Midpoint Displacement and the Diamond Square Algorithm run in linear time compared to the Fourier transformation algorithms with run in NlogN time.
-\item
-\end {itemize}
-\end{frame}
 
 \subsection{Terrain Generation Using The Fast Fourier Transform}
 
@@ -271,7 +267,7 @@
 \begin{itemize}
 \item Not an iterative process
 \item Begin using a random Gaussian noise
-\item This is a two dimensional grid of discrete random values. 
+\item This is a two dimensional NxM grid of discrete random values. 
 \item Apply the fast Fourier transform (FFT)
 \begin{center}
 \includegraphics[scale=0.3]{fft2d.jpg}
@@ -283,7 +279,7 @@
 \frametitle{Fast Fourier Transform}
 \begin{itemize}
 \item The Fast Fourier Transform performs the discrete Fourier transform (DFT). 
-\item A two dimensional discrete Fourier transform for and "$N$x$M$ grid in $x$ and $y$ is 
+\item A two dimensional discrete Fourier transform for an $N$x$M$ grid in $x$ and $y$ is 
 	$$F(u,v)=1/NM\displaystyle\sum\limits_{x=0}^{N-1} \displaystyle\sum\limits_{y=0}^{M-1} f(x,y)e^{-2\pi i(xu/N+yu/M)}$$
 \end{itemize}
 \end{frame}
@@ -297,7 +293,7 @@
 \includegraphics[scale=0.17]{fft3d.jpg}
 \end{center}
 \begin{itemize}
-\item We scale these frequencies using a frequency filter of the form $1/fr$.
+\item We scale these frequencies using a frequency filter of the form $1/f^r$.
 \end{itemize}
 \begin{center}
 \includegraphics[scale=0.2]{filter2d.jpg}
@@ -315,7 +311,7 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \end{frame}
 
 \begin{frame}
-\frametitle{Uses and Benefits of Terrain Generation Using The Fast Fourier Transform}
+\frametitle{Benefits of Terrain Generation Using The Fast Fourier Transform}
 \begin{itemize}
 \item Fractal landscape with smooth rolling features rather than ridges and peaks.
 \item Terrain can be tiled using this method.
@@ -350,10 +346,24 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \item There are four different stages in creating a multi-fractal generated terrain:
 \begin{itemize}
 \item The first stage is to generate a Levy noise field with a certain $\alpha$
-\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function $K(q)$
-\item The third stage is to exponentiate and normalize the output of stage two
-\item The fourth and final stage is to fractal integrate the multi-fractal field
+<<<<<<< HEAD
+$${S_{n}} = \frac{{x_{1}} + {x_{2}} + ... + {x_{n}}}{n^{\frac{1}{\alpha}}}$$
+\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function: 
+$$K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$$ which results in $${\Gamma_{\lambda}}$$
 \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{How the Multifractal Technique Works in Generating Fractal Landscape (cont.)}
+\begin{itemize}
+=======
+\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function $K(q)$
+>>>>>>> commit
+\item The third stage is to exponentiate and normalize the output of stage two
+$${\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}$$
+\item The fourth and final stage is to fractal integrate the multi-fractal field
+$$\frac{1}{f^{\beta}}$$ where $$\beta = 2H + 1$$
 \end{itemize}
 \end{frame}
 
@@ -368,7 +378,6 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{itemize}
 \item This is done by taking the grid of normalized noises $S(\alpha)$ from stage one and transform it to the Fourier domain using a Fast Fourier Transformation.
 \item Then to obtain the multi-scaling behavior, the transformed $S(\alpha)$ is weighted with a factor 
-\end{itemize}
 \end{itemize}
 \end{itemize}
 \end{frame}
@@ -413,8 +422,17 @@ in order to generate a fractal landscape that is the sum of the waves at differe
 \begin{frame}
  \frametitle{Current Research}
 \begin{itemize}
+<<<<<<< HEAD
+\item Video Games
+\item Movies and Television Shows
+\\
+\begin{center}
+\includegraphics[scale = 0.2]{applicationslidepic.jpg}
+\end{center}
+=======
  \item Multifractal Technique
 \item 
+>>>>>>> commit
 \end{itemize}
 \end{frame}
 
