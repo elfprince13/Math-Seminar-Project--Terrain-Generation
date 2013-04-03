@@ -190,7 +190,7 @@
  \item Relatively straightforward
  \item Realistic features
 \item Begin with a line between two points.
-\item The midpoint of this line is then displaced by some random amount in a vertical direction.
+\item The midpoint of this line this then displaced by some random amount in a vertical direction.
 \item The midpoints of these two new line segments are then displaced by a random amount in the vertical direction.
 \item Repeat until you have reached desired level of detail.
 \end{itemize}
@@ -327,24 +327,26 @@ in order to generate a fractal landscape by summing the sine and cosine waves at
 \begin{frame}
  \frametitle{Multifractal Technique}
 \begin{itemize}
-\item Very new technique 
-\item The multi fractal technique uses four parameters to create a generated landscape: 
+\item Very new technique
+\item This technique has, so far, has mostly been used to extract information for images of natural terrain. 
+\item The multi fractal technique uses four parameters to create a generated landscape: $\alpha$, $C1$ $S$, and $R$. 
 \begin{itemize}
-\item $\alpha$ 
-\item $C_{1}$
-\item $S$
-\item $H$
-\end{itemize} 
+\item The first variable, $\alpha$, is used to determine the occurrence of peaks or singularities throughout the terrain.
+\item The second variable, $C1$, is used to contrail the roughness of the terrain
+\item The third variable, $S$, is the random number (seed) generator
+\item The last variable, $R$, is the square resolution of the terrain surface.
+\end{itemize}
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{How the Multifractal Technique Works in Generating Fractal Landscape}
+\frametitle{Multifractal Technique (cont.)}
 \begin{itemize}
 \item There are four different stages in creating a multi-fractal generated terrain:
 \begin{itemize}
 \item The first stage is to generate a Levy noise field with a certain $\alpha$
+<<<<<<< HEAD
 $${S_{n}} = \frac{{x_{1}} + {x_{2}} + ... + {x_{n}}}{n^{\frac{1}{\alpha}}}$$
 \item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function: 
 $$K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$$ which results in $${\Gamma_{\lambda}}$$
@@ -355,10 +357,38 @@ $$K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$$ which results in 
 \begin{frame}
 \frametitle{How the Multifractal Technique Works in Generating Fractal Landscape (cont.)}
 \begin{itemize}
+=======
+\item The second stage is to filter the output of the first stage to get a multi-scaling behavior as defined by the characteristic function $K(q)$
+>>>>>>> commit
 \item The third stage is to exponentiate and normalize the output of stage two
 $${\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}$$
 \item The fourth and final stage is to fractal integrate the multi-fractal field
 $$\frac{1}{f^{\beta}}$$ where $$\beta = 2H + 1$$
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{How the Multifractal Technique Works in Generating Fractal Landscape}
+\begin{itemize}
+\item The first stage is generating a Levy noise field, with a certain $\alpha$
+\begin{itemize}
+\item $\alpha$ ranges between 0 and 2 
+\end{itemize}
+\item The second stage is to filter the output of stage one to get a multi-scaling behavior according to the characteristic function $K(q)$
+\begin{itemize}
+\item This is done by taking the grid of normalized noises $S(\alpha)$ from stage one and transform it to the Fourier domain using a Fast Fourier Transformation.
+\item Then to obtain the multi-scaling behavior, the transformed $S(\alpha)$ is weighted with a factor 
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{How the Multifractal Technique Works in Generating Fractal Landscape (cont)}
+\begin{itemize}
+\item The third stage is to exponentiate and normalize the output of stage two to obtain a multifractal field.
+\begin{itemize}
+\item
+\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -367,7 +397,7 @@ $$\frac{1}{f^{\beta}}$$ where $$\beta = 2H + 1$$
 \begin{frame}
  \frametitle{Conclusion}
 \begin{itemize}
-  \item The standard method seems to be Diamond Square algorithm, as it produces the fairly realistic landscape through random generation.
+  \item Best method seems to be Diamond Square algorithm, as it produces the most realistic landscape through random generation.
   \item The fast Fourier transform allows for flatter terrain generation and the ability to tile
  \item Newest method is the Multifractal Technique which uses images of real terrain to generate terrain with very accurate features
   \end{itemize}
@@ -390,16 +420,24 @@ $$\frac{1}{f^{\beta}}$$ where $$\beta = 2H + 1$$
 \end{frame}
 
 \begin{frame}
-\frametitle{Applications}
+ \frametitle{Current Research}
 \begin{itemize}
+<<<<<<< HEAD
 \item Video Games
 \item Movies and Television Shows
 \\
 \begin{center}
 \includegraphics[scale = 0.2]{applicationslidepic.jpg}
 \end{center}
+=======
+ \item Multifractal Technique
+\item 
+>>>>>>> commit
 \end{itemize}
 \end{frame}
+
+
+
 
 
 \begin{frame}
@@ -412,8 +450,27 @@ $$\frac{1}{f^{\beta}}$$ where $$\beta = 2H + 1$$
 %\section<presentation>*{\appendixname}
 %\subsection<presentation>*{For Further Reading}
 
-\begin{frame}[allowframebreaks]
+\begin{frame}[shrink=30]
   \frametitle{For Further Reading}
+  
+Bourke, Paul (1997). Frequency Synthesis of Landscapes (and clouds). Retrieved from http://paulbourke.net/fractals/noise/.
+ 
+ Ewe, H.T.; Tan,S.L.; Teng, H.T. (2010). Multifractal Dimension and Its Geometrical Terrain Properties for Classification of Multi-band Multi-polarized Sar Image. \emph{Progress in Electromagnetics Research 104, 221-237}.
+ 
+ Jense, Hans; van Pabst, Joost van Lawick. Dynamic Terrain Generation Based on Multifractal Techniques. 
+ 
+ Jilesen, Jonathan; Kuo, Jim; Lien, Fue-Sang (2012). Three-dimensional Midpoint Displacement Algorithm for the Generation of Fractal Porous Media. \emph{Computers and Geosciences 46 164-173}.
+ 
+ Macklem, Grant (2003). Computer Landscape Generation and Smoothing: Masters Comprehensive Exam.
+   
+Methods of Terrain Generation. Retrieved from http://www.cescg.org/CESCG99/PLobaz/sec4.html.
+
+S. Pecknold, S. Lovejoy, D. Schertzer, C. Hooge, and J. F. Malouin, The simulation of universal multifractals, Cellular Automata, World Scientific, 1993.
+
+Stanger, Keith (2006). Algorithms for Generating Fractal Landscape. Retrieved from http://www.student.math.uwaterloo.ca/~pmat370/PROJECTS/2006/Keith_Stanger_Fractal_Landscapes.pdf.
+
+
+   
     
 %  \begin{thebibliography}{10}
     
