@@ -1,5 +1,5 @@
  
-\documentclass{article}
+\documentclass[11pt,twocolumn]{article}
 
     \usepackage{fullpage}          %This will give you the standard 1in. margins, 12pt font, single spaced, page numbers, ect.  
     \usepackage{url}                 %This is intended if you have a website in the bibliography
@@ -21,17 +21,22 @@
      \end{abstract}
      
      	\section{Introduction}
-		The work described in this paper aims to describe different methods and algorithms that are used for artificial fractal landscape generation.  The goal in generating these landscapes is to make them look as realistic as possible. To make a terrain look realistic there are many different aspects that need to be taken into consideration. Some of these aspects are: hills and valleys, color, trees and other plants. The focus of this paper is going to be on different methods used to generate the terrain and how realistic they look based on the hills and valleys. The algorithms discussed in this paper all have varying levels of accuracy when it comes to representing the topological aspect of the landscape naturally. 
+		The work discussed in this paper aims to describe different methods and algorithms that are used for artificial fractal landscape generation.  The goal in generating these landscapes is to make them look as realistic as possible. To make a terrain look realistic there are many different aspects that need to be taken into consideration. Some of these include hills and valleys, color, trees and other plants. The focus of this paper is going to be on different methods used to generate the terrain and how realistic they look based on the hills and valleys. The algorithms discussed in this paper all have varying levels of accuracy when it comes to representing the topological aspect of the landscape naturally. 
 
-Fractal geometry is a branch of mathematics that studies irregular shapes in the real world. The general definition of a fractal is an infinitely, self-similar, iterated, and detailed mathematical shape with a non-integer dimension. More simply, fractals are shapes that have self-similar patterns, meaning that they appear to look the same far away as they do up close. Fractals can first be seen in mathematics as early as the 17th century with the idea of recursion.  The word ‘fractal’ was not introduced until 1975 by a mathematician named Benoit Mandelbrot. It is derived from the Latin word fractus, which means broken or shattered glass. 
+Fractal geometry is a branch of mathematics that studies irregular shapes in the real world. The general definition of a fractal is an infinitely self-similar, iterated, and detailed mathematical shape with a non-integer dimension. More simply, fractals are shapes that have self-similar patterns, meaning that they appear to look the same far away as they do up close. Fractals can first be seen in mathematics as early as the 17th century with the idea of recursion.  The word ‘fractal’ was not introduced until 1975 by a mathematician named Benoit Mandelbrot. It is derived from the Latin word fractus, which means broken or shattered glass. 
 
-Fractals were first used in terrain generation in 1967. Benoit Mandlebrot was the mathematician to first propose it. Mandlebrot proposed a question about how long the coastline of Britain was.  This simple question lead to many different and varying results. This is because it depended on the scale that the person was using to measure the coastline. The farther out they zoomed and the smaller scale that they used resulted in a greater result. The answer to the question is that the coastline of Britain is not measurable because it is not one-dimensional. It is a fractal. (Stanger)
+  \begin{figure}[h]
+  \includegraphics[scale=0.5]{BritainCoastline.png}
+  \caption{The coastline of Britain has a fractal dimension}
+  \label{fig:britcoast}
+  \end{figure}
+Fractals were first used in terrain generation in 1967. Benoit Mandlebrot was the mathematician to first propose it. Mandlebrot proposed a question about how long the coastline of Britain was.  This simple question lead to many different and varying results. This is because it depended on the scale that the person was using to measure the coastline (see Figure \ref{fig:britcoast}). The farther out they zoomed and the smaller scale that they used resulted in a greater result. The answer to the question is that the coastline of Britain is not measurable because it is not one-dimensional. It is a fractal. (Stanger)
 
 Fractals are used in landscape generation because they are self-similar and have a non-integer dimension. Being self-similar means that the fractal is going to appear basically the same no matter the level of magnification. So fractals are able to produce a landscape that is going to look like a terrain no matter the level of magnification. Fractals are also optimal for landscape generation because of their non-integer dimensions. This means that fractals have a dimension that is between two whole numbers. A fractal will vary between these two whole numbers depending on how much space it needs as it twists and curves. This means that a fractal that is closing in on two dimensions is going to appear as a large hill with small mounds and a fractal approaching three dimensions is going to resemble a rougher terrain with slightly smaller hills. (Patrzalek)
 
 	The first method that this paper explores is the Midpoint Displacement Algorithm. This algorithm is the simplest algorithm for generating terrain. The Midpoint Displacement algorithm was first discovered 
 
-	Another method that is similar to, but not exactly the same as, the Midpoint Displacement Algorithm is the Diamond Square Algorithm. Alain Fournier, Don Fussell, and Loren Carpenter at SIGGRAPH first discovered the Diamond Square Algorithm in 1982. SIGGRAPH is stands for Special Interest Group on GRAPHics and the Interactive Techniques. It is an annual conference on computer graphics. Gavin S. P. Miller revisited this algorithm in 1986 at the same conference. This is when it was discovered that the algorithm was “flawed”. The algorithm produces vertical and horizontal creases in the generated landscape. (Martz)
+	Another method that is similar to, but not exactly the same as, the Midpoint Displacement Algorithm is the Diamond Square Algorithm. Alain Fournier, Don Fussell, and Loren Carpenter first described the Diamonds \& Squares Algorithm at SIGGRAPH 1982 (Special Interest Group on GRAPHics and Interactive Techniques). Gavin S. P. Miller revisited this algorithm in 1986 at the same conference. This is when it was discovered that the algorithm was “flawed”. The algorithm produces vertical and horizontal creases in the generated landscape. (Martz)
 
 	Both the Diamond-Square Algorithm and the Midpoint Displacement Algorithm are going to use multiple iterations of random values to create a landscape. This is going to apply the iteration at a smaller scale each time through. It will then take the random number as an altitude to produce the resulted landscape. Both of these algorithms use recursive subdivision methods, which allows both of these algorithms to be run in linear time. (Miller) 
 
@@ -61,7 +66,14 @@ and similarly, for midpoints along rows,
 		.\end{equation}
 Whereas midpoints centered between corners are given by
 				\begin{equation}
-			T_{k \cdot 2^{n},k' \cdot 2^{n}} = \frac{T_{(k-1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k-1) \cdot 2^{n},(k'+1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'+1) \cdot 2^{n}}}{4} + A \cdot R \cdot 2^{-H \cdot n}
+			%T_{k \cdot 2^{n},k' \cdot 2^{n}} = \frac{T_{(k-1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k-1) \cdot 2^{n},(k'+1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'-1) \cdot 2^{n}} + T_{(k+1) \cdot 2^{n},(k'+1) \cdot 2^{n}}}{4} + A \cdot R \cdot 2^{-H \cdot n}
+			\begin{split}
+			T_{k \cdot 2^{n},k' \cdot 2^{n}} =& \left(\frac{1}{4}\right)T_{(k-1) \cdot 2^{n},(k'-1) \cdot 2^{n}} \\
+			& + \left(\frac{1}{4}\right)T_{(k-1) \cdot 2^{n},(k'+1) \cdot 2^{n}} \\
+			& + \left(\frac{1}{4}\right)T_{(k+1) \cdot 2^{n},(k'-1) \cdot 2^{n}} \\
+			& + \left(\frac{1}{4}\right)T_{(k+1) \cdot 2^{n},(k'+1) \cdot 2^{n}} \\
+			& + A \cdot R \cdot 2^{-H \cdot n}
+			 \end{split}
 		.\end{equation}
 (where
 		\begin{equation}
