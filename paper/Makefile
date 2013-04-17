@@ -1,15 +1,13 @@
 all: terrain.bbl
-	latex terrain.tex
-	dvipdfm terrain.dvi
+	pdflatex terrain.tex
 	pdflatex "Terrain Presentation.tex" 
 terrain.bbl: terrain.aux
 	bibtex terrain.aux
 
 terrain.aux:
-	latex terrain.tex
+	pdflatex terrain.tex
 
 clean:
-	rm terrain.dvi
 	rm terrain.pdf
 	rm terrain.log
 	rm terrain.bbl
