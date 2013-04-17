@@ -21,6 +21,7 @@
      \end{abstract}
      
      	\section{Introduction}
+	\label{sec:intro}
 		The work discussed in this paper aims to describe different methods and algorithms that are used for artificial fractal landscape generation.  The goal in generating these landscapes is to make them look as realistic as possible. To make a terrain look realistic there are many different aspects that need to be taken into consideration. Some of these include hills and valleys, color, trees and other plants. The focus of this paper is going to be on different methods used to generate the terrain and how realistic they look based on the hills and valleys. The algorithms discussed in this paper all have varying levels of accuracy when it comes to representing the topological aspect of the landscape naturally. 
 
 Fractal geometry is a branch of mathematics that studies irregular shapes in the real world. The general definition of a fractal is an infinitely self-similar, iterated, and detailed mathematical shape with a non-integer dimension. More simply, fractals are shapes that have self-similar patterns, meaning that they appear to look the same far away as they do up close. Fractals can first be seen in mathematics as early as the 17th century with the idea of recursion.  The word ‘fractal’ was not introduced until 1975 by a mathematician named Benoit Mandelbrot. It is derived from the Latin word fractus, which means broken or shattered glass. 
@@ -30,24 +31,25 @@ Fractal geometry is a branch of mathematics that studies irregular shapes in the
   \caption{The coastline of Britain has a fractal dimension}
   \label{fig:britcoast}
   \end{figure}
-Fractals were first used in terrain generation in 1967. Benoit Mandlebrot was the mathematician to first propose it. Mandlebrot proposed a question about how long the coastline of Britain was.  This simple question lead to many different and varying results. This is because it depended on the scale that the person was using to measure the coastline (see Figure \ref{fig:britcoast}). The farther out they zoomed and the smaller scale that they used resulted in a greater result. The answer to the question is that the coastline of Britain is not measurable because it is not one-dimensional. It is a fractal. (Stanger)
+Fractals were first used in terrain generation in 1967. Benoit Mandlebrot was the mathematician to first propose it. Mandlebrot proposed a question about how long the coastline of Britain was.  This simple question lead to many different and varying results. This is because it depended on the scale that the person was using to measure the coastline (see Figure \ref{fig:britcoast}). Examining the coastline at increasingly higher resolutions yields an increase in length due to the recursive levels of detail. The answer to the question is that the coastline of Britain is not measurable because it is not one-dimensional. It is a fractal. (Stanger)
 
 Fractals are used in landscape generation because they are self-similar and have a non-integer dimension. Being self-similar means that the fractal is going to appear basically the same no matter the level of magnification. So fractals are able to produce a landscape that is going to look like a terrain no matter the level of magnification. Fractals are also optimal for landscape generation because of their non-integer dimensions. This means that fractals have a dimension that is between two whole numbers. A fractal will vary between these two whole numbers depending on how much space it needs as it twists and curves. This means that a fractal that is closing in on two dimensions is going to appear as a large hill with small mounds and a fractal approaching three dimensions is going to resemble a rougher terrain with slightly smaller hills. (Patrzalek)
 
-	The first method that this paper explores is the Midpoint Displacement Algorithm. This algorithm is the simplest algorithm for generating terrain. The Midpoint Displacement algorithm was introduced in [some year].
+	\S \ref{sec:midpoint} explores is the Midpoint Displacement Algorithm. The algorithm is the simplest algorithm for generating terrain. The Midpoint Displacement algorithm was introduced in [some year].
 
 	Another method that is similar to, but not exactly the same as, the Midpoint Displacement Algorithm is the Diamond Square Algorithm. Alain Fournier, Don Fussell, and Loren Carpenter first described the Diamonds \& Squares Algorithm at SIGGRAPH 1982 (Special Interest Group on GRAPHics and Interactive Techniques). Gavin S. P. Miller revisited this algorithm in 1986 at the same conference. This is when it was discovered that the algorithm was “flawed”. The algorithm produces vertical and horizontal creases in the generated landscape. (Martz)
 
-	Both the Diamond-Square Algorithm and the Midpoint Displacement Algorithm are going to use multiple iterations of random values to create a landscape. This is going to apply the iteration at a smaller scale each time through. It will then take the random number as an altitude to produce the resulted landscape. Both of these algorithms use recursive subdivision methods, which allows both of these algorithms to be run in linear time. (Miller) 
+	Both the Diamond-Square Algorithm and the Midpoint Displacement Algorithm use multiple iterations of random values to create a landscape. This is going to apply the iteration at a smaller scale each time through. It will then take the random number as an altitude to produce the resulted landscape. Both of these algorithms use recursive subdivision methods, which allows both of these algorithms to be run in linear time. (Miller) 
 
-	The second method that is discussed is the paper is the Fourier Transform Algorithm. Cooley and Turkey first discovered the algorithm in 1965 though, Gauss initially discovered it in 1805. The Fast Fourier transformation can be used to create fractal landscapes. This is going to create a landscape using a frequency domain. The landscape generated by this algorithm is going to take in the random numbers and model their frequencies to create a landscape. (Kareem)
+\S \ref{sec:FFT} describes the use of the Fast Fourier transformation can be used to create fractal landscapes as well. This is going to create a landscape using a frequency domain. The landscape generated by this algorithm is going to take in the random numbers and model their frequencies to create a landscape. (Kareem)
 	
-	The last algorithm that is explored in this paper is the multifractal technique. A multifractal set is a set of fractals that can be divided up into multiple subsets, each having their own dimension. A multifractal system is different from a fractal system because it has more than just one exponent. A multifractal system is used when more than one exponent is needed to describe the dynamics of an object. This can be seen in terrain generation. They allow for a more precise and natural looking landscape as the magnification is increased. 
+	Finally, \S \ref{sec:multifractal} describes the multifractal and its application to terrain generation. A multifractal set is a set of fractals that can be divided up into multiple subsets, each having their own dimension. A multifractal system is different from a fractal system because it has more than just one exponent. A multifractal system is used when more than one exponent is needed to describe the dynamics of an object. This can be seen in terrain generation. They allow for a more precise and natural looking landscape as the magnification is increased. 
 
 	In the remainder of this paper we will explore the three methods mentioned above: the Midpoint Displacement Algorithm (and the Diamond Square Algorithm), the Fast Fourier Transformation Algorithm, and the Multifractal technique, in more detail. We will also discuss the implementation of each of these methods and examine the resulting landscapes. 
 	
 
 	\section{Midpoint Displacement Method}
+	\label{sec:midpoint}
 		Generating fractal terrains by midpoint displacement is a relatively straightforward method for generating artificial terrain with realistic features. The dimensions of the terrain must be a square with sides of length $2^{N}+1$, so that each sub-square has an exact middle lying on a gridpoint. Given a heightfield,
 		\begin{equation}
 		T = \left[ \begin{matrix}
@@ -129,6 +131,7 @@ The FFT allows us to decompose the random noise into the sum of the sine and cos
   \end{figure}
 
 	    \section{Multifractal Technique}
+	    \label{sec:multifractal}
 	    Multifractal technique is an extremely recent technique in generating terrain. This technique so far has mostly been used to extract information for images of natural terrain. It then takes this information extracted from the image and create a generated landscape matching the natural landscape in the picture. This technique has been used in SAR (Synthetic Aperture Radar) imaging for generating what the terrain on Mars and other planets look like. However, this technique can be applied to generating a whole new terrain that is not based of an image.  This is what makes the multi fractal technique valuable technique, it can be used to extract information from an actual terrain to make a generated duplicate of it and it can generate terrain from scratch without using an image.
 	    	
 		The multi fractal technique uses four parameters to create a generated landscape. These four variables are: $\alpha$, $C1$, $S$, and $R$. The variable $\alpha$ is the Levy parameter that is used to determine the occurrence of peaks or singularities in the terrain. The variable $C1$ is the parameter that controls the spareness of the mean terrain height, or more simply put the roughness of the terrain.The variable $S$ is used as a seed (an initial number) for the random number generator. Lastly, $R$ is for the square resolute of the terrain surface. (Joost van Lawick van Pabst and Hans Jense) 
@@ -142,6 +145,7 @@ The FFT allows us to decompose the random noise into the sum of the sine and cos
 		The four and final stage of creating this terrain, is taking that raw multi fractal field and fractal integrating it. This is going to take the raw field, which is has extreme pointed spikes throughout the field. The raw multi fractal field is unrealistic when it comes to terrain generation, unless it is modeling the inside of a cave. When the raw multi fractal field is integrated, it smoothes out the spikes and make the output look like an actual terrain. This resulting terrain after this stage is going to be the completed landscape generated by the multi fractal technique.
 
 \section{Our Artificial Three Dimensional Terrain}
+\label{sec:ourterrain}
 Another method to generate terrain is multiplying two methods together in rode to create a more realistic looking terrain. By using this method, it is possible to create flatter valleys and sharper peaks (see Figure \ref{fig:multiplication}). 
 
   \begin{figure}[h]
@@ -151,6 +155,7 @@ Another method to generate terrain is multiplying two methods together in rode t
   \end{figure}
 
  \section{Conclusion}
+ \label{sec:conclusion}
    This paper has discussed and examined three different algorithms for generating fractal terrain. The Midpoint Displacement Algorithm and the Diamond Square Algorithm have been shown to be very similar. This is because the Diamond Square Algorithm is an improvement apron the Midpoint Displacement Algorithm. The two algorithms, in fact, only differ by one step that has been added to the Diamond Square Algorithm. They both produce terrain that is quantify different than natural terrains. It can be seen in the terrains generated that there are some obvious flaws. One of the biggest flaws of these two algorithms is that they produce 'crease' in the terrain that is generated. These crease can either be vertical or horizontal, both of which help in making the terrain look unnatural. 
    
    The Fourier transformation, on the other hand, creates a landscape that is smoother than the terrain generated by the above two algorithms. The Fourier terrain has peaks and valleys that are less ridged and unnatural looking. The peaks and the valleys produced by the Fourier transformation is going to be a smoother landscape with less intense changes in the height. 
