@@ -8,6 +8,7 @@
     \usepackage{amsmath, amsthm, amssymb}
     \usepackage{epsfig}
     \usepackage{pslatex}
+	\usepackage[font=small,labelfont=bf]{caption}
 
     \title{Techniques for Fractal Terrain Generation}
     \author{Krista Bird \and Thomas Dickerson \and Jessica George}
@@ -136,17 +137,23 @@
 	leaves square-shaped artifacts in the terrain. The Diamonds and Squares method attempts to alleviate this
 	by alternating calculated values to square and diamond patterned midpoints.
 	
+	\begin{figure}[ht]
+	\includegraphics[scale=0.25]{diamondsandsquares.jpg}
+	\caption{An aritifical terrain generated using the Diamond and Squares Algorithm}
+	\label{fig:DandS}
+	\end{figure}
+	
 	\subsection{Variations: Triangular Mesh}
 	It is also relatively common to implement a midpoint displacement rule using a triangular, rather than square, mesh.
 	The subdivision rules are slightly more complex to described as a formula, but algorithmically identical in principle.
 	Triangles have the advantage of providing an unambiguous surface definition from the heightfield, because every triangle
 	is necessarily planar. Heightfields defined by meshes containing polygons with 4 or more edges can be produced from families
-	of surfaces parameterized by the orientation of creases when those polygons are nonplanar.
+	of surfaces parameterized by the orientation of creases when those polygons are nonplanar (see Figure \ref{fig:trimesh}).
 	
 	\begin{figure}[ht]
-	\includegraphics[scale=0.25]{diamondsandsquares.jpg}
-	\caption{An aritifical terrain generated using the Diamond and Squares Algorithm}
-	\label{fig:DandS}
+	\includegraphics[scale=0.3]{triangularmidpoint.png}
+	\caption{Like squares, triangles are also easily subdivided. They have the advantage of always being planar.}
+	\label{fig:trimesh}
 	\end{figure}
   
 	\subsection{Implementation Challenges}
@@ -211,19 +218,44 @@
 	roughness of the terrain.The variable $S$ is used as a seed (an initial number) for the random number generator. Lastly, $H$
 	is for the how smooth the final landscape is going to be. ~\cite{PabstJense}.
 	
-	There are four different stages that are used to create the final multi fractal generated terrain.The first stage in this process is generating a Levy noise field with a certain $\alpha$. When generating a Levy noise field, there are one parameter that is going to control
-	the outcome of the field produced.   This is going to be the variable $\alpha$. This variable is going to range between 0 and 2. When $\alpha$ equals 2, it is going to cause only small peaks or singularities throughout the field. This is because when $\alpha$ equals 2, it is going to cause the noise to be bounded. When $\alpha$ is less than 2, it is going to mean that the noises are not necessarily bounded any more which is going to cause bigger peaks or singularities throughout the landscape. This is done using this equation: $${S_{n}} = \frac{{x_{1}} + {x_{2}} + ... + {x_{n}}}{n^{\frac{1}{\alpha}}}$$. Where the $x's$ are the normalized sum of noises at each grid point on the landscape.
-	The second stage is generating the terrain is to filter the output of stage one to get a multi scaling behavior according to the characteristic equation. This is done by taking the grid of normalized noises and transforming it to the Fourier domain using a fast fourier transformation. This is going to be done in the same way as described in section 3. Then, $S(\alpha)$ is weighted and bounded by the characteristic equation: $$K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$$ This is going to result in the desired multi scaling behavior. Finally, an inverse fast fourier transformation is applied, again this is going to be done in the same way as described in section 3. This is going to result in $\Gamma_{\lambda}$, which is also know as the additive increment generator of the multi fractal field. 
-	The third stage is generating a multi fractal terrain is to exponentiate and normalize $\Gamma_{\lambda}$ from the second stage. To complete this stage, the resulting $\Gamma_\lambda$ and plug it into the following equation: $${\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}$$ The $N_{1}$ in this equation is just going to be a normalization factor. This is stage is going to result in $\epsilon_{\lambda}$, which is the raw multi fractal field. 
-	The fourth and final stage in this process is going to be to fractal integrate the raw multi fractal field to produce the final terrain. IFractal integration is the process of introducing a frequency filter to the terrain.n simpler terms, fractal integration is going to introduce a frequency filter. This filter is going to filter the frequencies in the landscape to make sure that none of the frequencies are either too high or too low.  This frequency filter is going to be determined by the term $$\frac{1}{f^{\beta}}$$ Where $\beta = 2H + 1$. So, the larger H becomes, the smoother the resulting landscape is going to be. 
+	There are four different stages that are used to create the final multi fractal generated terrain.The first stage in this process is
+	generating a Levy noise field with a certain $\alpha$. When generating a Levy noise field, there are one parameter that is going to
+	control the outcome of the field produced. This is going to be the variable $\alpha$. This variable is going to range between 0 and 2.
+	When $\alpha$ equals 2, it is going to cause only small peaks or singularities throughout the field. This is because when $\alpha$ equals 2,
+	it is going to cause the noise to be bounded. When $\alpha$ is less than 2, it is going to mean that the noises are not necessarily
+	bounded any more which is going to cause bigger peaks or singularities throughout the landscape.
+	This is done using this equation: $${S_{n}} = \frac{{x_{1}} + {x_{2}} + ... + {x_{n}}}{n^{\frac{1}{\alpha}}}$$.
+	Where the $x$'s are the normalized sum of noises at each grid point on the landscape.
+	
+	The second stage is generating the terrain is to filter the output of stage one to get a multi scaling behavior according to the
+	characteristic equation. This is done by taking the grid of normalized noises and transforming it to the Fourier domain using a
+	fast fourier transformation. This is going to be done in the same way as described in section 3. Then, $S(\alpha)$ is weighted and
+	bounded by the characteristic equation: $$K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$$ This is going to result in the
+	desired multi scaling behavior. Finally, an inverse fast fourier transformation is applied, again this is going to be done in the same
+	way as described in section 3. This is going to result in $\Gamma_{\lambda}$, which is also know as the additive increment generator of
+	the multi fractal field.
+	
+	The third stage is generating a multi fractal terrain is to exponentiate and normalize $\Gamma_{\lambda}$ from the second stage.
+	To complete this stage, the resulting $\Gamma_\lambda$ and plug it into the following equation:
+	$${\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}$$. The $N_{1}$ in this equation is just going to be a normalization factor.
+	This is stage is going to result in $\epsilon_{\lambda}$, which is the raw multi fractal field. 
+	
+	The fourth and final stage in this process is going to be to fractal integrate the raw multi fractal field to produce the final terrain.
+	Fractal integration is the process of introducing a frequency filter to the terrain. In simpler terms, fractal integration is going to
+	introduce a frequency filter. This filter is going to filter the frequencies in the landscape to make sure that none of the frequencies
+	are either too high or too low.  This frequency filter is going to be determined by the term $$\frac{1}{f^{\beta}}$$,
+	where $\beta = 2H + 1$. So, the larger H becomes, the smoother the resulting landscape will be. 
 
 	\section{Our Artificial Three Dimensional Terrain}
 	\label{sec:ourterrain}
-	Another method to generate terrain is multiplying two methods together in rode to create a more realistic looking terrain.
-	By using this method, it is possible to create flatter valleys and sharper peaks (see Figure \ref{fig:multiplication}). 
+	It is also possible to combine generated terrain of like dimensions by multiplication of their respective heightfields.
+	If the terrain heightfields are normalized, this is quite simple. If the heightfields are not normalized, you can instead
+	take their geometric mean to keep the height values within a reasonable range. When working with generated terrains, this
+	multiplication technique can produce added realism for certain types of landscapes, as it will result in flatter valleys and
+	sharper peaks (see Figure \ref{fig:multiplication}). 
 
 	\begin{figure}[ht]
-	\includegraphics[scale=0.3]{multipliedterrain.jpg}
+	\includegraphics[scale=0.275]{multipliedterrain.jpg}
 	\caption{A terrain generated using the Multiplication Method}
 	\label{fig:multiplication}
 	\end{figure}
