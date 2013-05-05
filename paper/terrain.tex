@@ -26,7 +26,7 @@
 	The work discussed in this paper aims to describe different methods and algorithms that are used for artificial fractal
 	landscape generation.  The goal in generating these landscapes is to make them look as realistic as possible.
 	To make a terrain look realistic there are many different factors that need to be taken into consideration.
-	Some of these include hills and valleys, color, trees and other plants. The focus of this paper is going to be
+	Some of these include hills and valleys, color, trees and other plants. This paper is focused
 	on different methods used to generate the terrain with brief discussion on the tradeoffs between realism and implementation cost.
 	The algorithms discussed in this paper all have varying levels of success in reproducing topography that mimics the natural world. 
 
@@ -50,13 +50,13 @@
 	it is not one-dimensional. It is a fractal. ~\cite{Mandelbrot}.
 
 	Fractals are used in landscape generation because they are self-similar and have a non-integer dimension. Being self-similar means
-	that the fractal is going to appear basically the same no matter the level of magnification. So fractals are able to produce a landscape
-	that is going to look like a terrain no matter the level of magnification. Fractals are also optimal for landscape generation because of
+	that the fractal appears basically the same no matter the level of magnification. So fractals are able to produce a landscape
+	that look like a terrain no matter the level of magnification. Fractals are also optimal for landscape generation because of
 	their non-integer dimensions. This means that fractals have a dimension that is between two whole numbers.
 	There are differing definitions that can be used to characterize the fractal dimension of a curve or surface, depending on context or
 	application, but all of these definitions are statistical measures of the ability of that curve or surface to fill the space in which
 	it is embedded. A fractal will vary between these two whole numbers depending on how much space it needs as it twists and curves.
-	This means that a fractal that is closing in on two dimensions is going to appear as a large hill with small mounds and a fractal approaching three dimensions is going to resemble a
+	This means that a fractal that is closing in on two dimensions appear as a large hill with small mounds and a fractal approaching three dimensions resembles a
 	rougher terrain with slightly smaller hills. ~\cite{Mandelbrot}.
 
 	\S \ref{sec:midpoint} explores the Midpoint Displacement Algorithm.
@@ -173,9 +173,13 @@
 	The terrain is initialized with random Gaussian noise (other types of noise can be used here as well), which is a two dimensional
 	grid of discrete random values, sampled from a Gaussian distribution. A fast Fourier transform (FFT) is then applied, which performs a discrete
 	Fourier transform (DFT). A two dimensional discrete Fourier transform for and $N \times M$ grid in the $x, y$ plane is described by
-	$$F(u,v)=\frac{1}{NM}\displaystyle\sum\limits_{x=0}^{N-1} \displaystyle\sum\limits_{y=0}^{M-1} f(x,y)e^{-2\pi i(xu/N+yu/M)},$$
+	\begin{equation}
+	F(u,v)=\frac{1}{NM}\displaystyle\sum\limits_{x=0}^{N-1} \displaystyle\sum\limits_{y=0}^{M-1} f(x,y)e^{-2\pi i(xu/N+yu/M)},
+	\end{equation}
 	and the inverse by
-	$$f(x,y)=\displaystyle\sum\limits_{u=0}^{N-1} \displaystyle\sum\limits_{v=0}^{M-1} F(u,v)e^{2\pi i(xu/N+yv/M)}.$$ ~\cite{CooleyTukey}.
+	\begin{equation}
+	f(x,y)=\displaystyle\sum\limits_{u=0}^{N-1} \displaystyle\sum\limits_{v=0}^{M-1} F(u,v)e^{2\pi i(xu/N+yv/M)}.
+	\end{equation} ~\cite{CooleyTukey}.
 
 	The FFT allows us to decompose the random noise into the sum of the sine and cosine functions. In Fourier space, the noise is broken
 	into cells. The magnitude of the wave with that frequency can be found in each cell. These magnitudes can then be converted to
@@ -212,34 +216,46 @@
 	and $H$. The variable $\alpha$ is the Levy parameter that is used to determine the occurrence of peaks or singularities in the
 	terrain. The variable $C1$ is the parameter that controls the spareness of the mean terrain height, or more simply put the
 	roughness of the terrain.The variable $S$ is used as a seed (an initial number) for the random number generator. Lastly, $H$
-	is for the how smooth the final landscape is going to be. ~\cite{PabstJense}.
+	is for the how smooth the final landscape will be. ~\cite{PabstJense}.
 	
 	There are four different stages that are used to create the final multi-fractal generated terrain. The first stage in this process is
-	generating a Levy noise field with a certain $\alpha$. When generating a Levy noise field, there is one parameter that is going to
+	generating a Levy noise field with a certain $\alpha$. When generating a Levy noise field, there is one parameter that
 	control the outcome of the field produced. This is the variable $\alpha$. This variable is ranges between 0 and 2.
-	When $\alpha$ equals 2, it is going to cause only small peaks or singularities throughout the field. This is because when $\alpha$ equals 2,
-	it causes the noise to be bounded. When $\alpha$ is less than 2, it is going to mean that the noises are not necessarily
-	bounded any more which is going to cause bigger peaks or singularities throughout the landscape.
-	This is done using this equation: $${S_{n}} = \frac{{x_{1}} + {x_{2}} + ... + {x_{n}}}{n^{\frac{1}{\alpha}}}$$
+	When $\alpha$ equals 2, it causes only small peaks or singularities throughout the field. This is because when $\alpha$ equals 2,
+	it causes the noise to be bounded. When $\alpha$ is less than 2, it means that the noises are not necessarily
+	bounded any more which causes bigger peaks or singularities throughout the landscape.
+	This is done using the equation
+	\begin{equation}
+	{S_{n}} = \frac{{x_{1}} + {x_{2}} + ... + {x_{n}}}{n^{\frac{1}{\alpha}}}.
+	\end{equation}
 	Where the $x$'s are the normalized sum of noises at each grid point on the landscape.
 	
 	The second stage in generating the terrain is to filter the output of stage one to get a multi scaling behavior according to the
 	characteristic equation. This is done by taking the grid of normalized noises and transforming it to the Fourier domain using a
 	fast Fourier transformation. This is done in the same way as described in section 3. Then, $S(\alpha)$ is weighted and
-	bounded by the characteristic equation: $$K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$$ This is going to result in the
-	desired multi scaling behavior. Finally, an inverse fast Fourier transformation is applied, again this is going to be done in the same
+	bounded by the characteristic equation
+	\begin{equation}
+	K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right).
+	\end{equation}
+	 This results in the
+	desired multi scaling behavior. Finally, an inverse fast Fourier transformation is applied, again this is done in the same
 	way as described in section 3. This is results in $\Gamma_{\lambda}$ which is also know as the additive increment generator of
 	the multi-fractal field.
 	
 	The third stage is generating a multi-fractal terrain is to exponentiate and normalize $\Gamma_{\lambda}$ from the second stage.
-	To complete this stage, the resulting $\Gamma_\lambda$ is then plugged into the following equation:
-	$${\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}$$ The $N_{1}$ in this equation is just a normalization factor.
+	To complete this stage, the resulting $\Gamma_\lambda$ is then plugged into the equation
+	\begin{equation}
+	{\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}.
+	\end{equation}
+	The $N_{1}$ in this equation is just a normalization factor.
 	This stage results in $\epsilon_{\lambda}$ which is the raw multi fractal field. 
 	
 	The fourth and final stage in this process is to fractal integrate the raw multi-fractal field to produce the final terrain.
-	Fractal integration is the process of introducing a frequency filter to the terrain. In simpler terms, fractal integration is going to
-	introduce a frequency filter. This filter is used to filter the frequencies in the landscape to make sure that none of the frequencies
-	are either too high or too low.  This frequency filter is determined by the term $$\frac{1}{f^{\beta}}$$
+	Fractal integration is the process of introducing a frequency filter to the terrain. In simpler terms, fractal integration introduces a frequency filter. This filter is used to filter the frequencies in the landscape to make sure that none of the frequencies
+	are either too high or too low.  This frequency filter is determined by the term
+	\begin{equation}
+	\frac{1}{f^{\beta}}
+	\end{equation}
 	where $\beta = 2H + 1$. This implies that the larger $H$ becomes, the smoother the resulting landscape will be. 
 
 	\section{Our Artificial Three Dimensional Terrain}
