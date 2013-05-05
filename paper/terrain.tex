@@ -209,38 +209,38 @@
 	extract information from an actual terrain to make a generated duplicate of it and it can generate terrain from scratch without
 	using an image.
 		
-	The multi-fractal technique uses four parameters to create a generated landscape. These four variables are: $\alpha$, $C1$, $S$,
+	The multi-fractal technique uses four parameters to create a generated landscape. These four parameters are: $\alpha$, $C1$, $S$,
 	and $H$. The variable $\alpha$ is the Levy parameter that is used to determine the occurrence of peaks or singularities in the
 	terrain. The variable $C1$ is the parameter that controls the spareness of the mean terrain height, or more simply put the
 	roughness of the terrain.The variable $S$ is used as a seed (an initial number) for the random number generator. Lastly, $H$
 	is for the how smooth the final landscape is going to be. ~\cite{PabstJense}.
 	
-	There are four different stages that are used to create the final multi-fractal generated terrain.The first stage in this process is
-	generating a Levy noise field with a certain $\alpha$. When generating a Levy noise field, there are one parameter that is going to
-	control the outcome of the field produced. This is going to be the variable $\alpha$. This variable is going to range between 0 and 2.
+	There are four different stages that are used to create the final multi-fractal generated terrain. The first stage in this process is
+	generating a Levy noise field with a certain $\alpha$. When generating a Levy noise field, there is one parameter that is going to
+	control the outcome of the field produced. This is the variable $\alpha$. This variable is ranges between 0 and 2.
 	When $\alpha$ equals 2, it is going to cause only small peaks or singularities throughout the field. This is because when $\alpha$ equals 2,
-	it is going to cause the noise to be bounded. When $\alpha$ is less than 2, it is going to mean that the noises are not necessarily
+	it causes the noise to be bounded. When $\alpha$ is less than 2, it is going to mean that the noises are not necessarily
 	bounded any more which is going to cause bigger peaks or singularities throughout the landscape.
 	This is done using this equation: $${S_{n}} = \frac{{x_{1}} + {x_{2}} + ... + {x_{n}}}{n^{\frac{1}{\alpha}}}$$
 	Where the $x$'s are the normalized sum of noises at each grid point on the landscape.
 	
-	The second stage is to generating the terrain is to filter the output of stage one to get a multi scaling behavior according to the
+	The second stage in generating the terrain is to filter the output of stage one to get a multi scaling behavior according to the
 	characteristic equation. This is done by taking the grid of normalized noises and transforming it to the Fourier domain using a
-	fast fourier transformation. This is going to be done in the same way as described in section 3. Then, $S(\alpha)$ is weighted and
+	fast Fourier transformation. This is done in the same way as described in section 3. Then, $S(\alpha)$ is weighted and
 	bounded by the characteristic equation: $$K(q) = \frac{C_{1}}{\alpha - 1}\left(q^{\alpha} - q\right)$$ This is going to result in the
 	desired multi scaling behavior. Finally, an inverse fast Fourier transformation is applied, again this is going to be done in the same
-	way as described in section 3. This is going to result in $\Gamma_{\lambda}$ which is also know as the additive increment generator of
+	way as described in section 3. This is results in $\Gamma_{\lambda}$ which is also know as the additive increment generator of
 	the multi-fractal field.
 	
 	The third stage is generating a multi-fractal terrain is to exponentiate and normalize $\Gamma_{\lambda}$ from the second stage.
-	To complete this stage, the resulting $\Gamma_\lambda$ and plug it into the following equation:
-	$${\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}$$ The $N_{1}$ in this equation is just going to be a normalization factor.
-	This stage is going to result in $\epsilon_{\lambda}$ which is the raw multi fractal field. 
+	To complete this stage, the resulting $\Gamma_\lambda$ is then plugged into the following equation:
+	$${\epsilon_{\lambda}} = {N_{1}} * e^{{\Gamma_{\lambda}}}$$ The $N_{1}$ in this equation is just a normalization factor.
+	This stage results in $\epsilon_{\lambda}$ which is the raw multi fractal field. 
 	
-	The fourth and final stage in this process is going to be to fractal integrate the raw multi-fractal field to produce the final terrain.
+	The fourth and final stage in this process is to fractal integrate the raw multi-fractal field to produce the final terrain.
 	Fractal integration is the process of introducing a frequency filter to the terrain. In simpler terms, fractal integration is going to
-	introduce a frequency filter. This filter is going to filter the frequencies in the landscape to make sure that none of the frequencies
-	are either too high or too low.  This frequency filter is going to be determined by the term $$\frac{1}{f^{\beta}}$$
+	introduce a frequency filter. This filter is used to filter the frequencies in the landscape to make sure that none of the frequencies
+	are either too high or too low.  This frequency filter is determined by the term $$\frac{1}{f^{\beta}}$$
 	where $\beta = 2H + 1$. This implies that the larger $H$ becomes, the smoother the resulting landscape will be. 
 
 	\section{Our Artificial Three Dimensional Terrain}
@@ -272,9 +272,9 @@
 	`crease' in the terrain that is generated. These creases can either be vertical or horizontal, both of which help
 	in making the terrain look unnatural. 
    
-	The Fourier transformation, on the other hand, creates a landscape that is smoother than the terrain generated
-	by the above two algorithms. The Fourier terrain produces terrain with flatter, rolling peaks and valleys. The peaks
-	and the valleys produced by the Fourier transformation produce a smoother landscape with less exaggerated changes in
+	The fast Fourier transformation, on the other hand, creates a landscape that is smoother than the terrain generated
+	by the above two algorithms. The fast Fourier terrain produces terrain with flatter, rolling peaks and valleys. The peaks
+	and the valleys produced by the fast Fourier transformation produce a smoother landscape with less exaggerated changes in
 	the height. 
    
 	The multi-fractal terrain generation is the most recent algorithm that was explored in this paper. This method of terrain
