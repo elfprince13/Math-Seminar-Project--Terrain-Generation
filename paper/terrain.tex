@@ -117,17 +117,11 @@
 			& + \left(\frac{1}{4}\right)T_{(k+1) \cdot 2^{n},(k'+1) \cdot 2^{n}} \\
 			& + A \cdot R \cdot 2^{-H \cdot n}
 		\end{split}
-	.\end{equation}
-	(where
-	\begin{equation}
-		k,k' \in \left\{ 1, 3, \cdots, 2^{N-n}-1 \right\}
-	\end{equation}
-	and
-	\begin{equation}
-		j \in \left\{ 0, 2, \cdots, 2^{N-n} \right\}
-	\end{equation})
-	for $n < N$. H is a smoothing parameter, A is an amplitude parameter,
-	and R is a random number from a uniform distribution between -1 and 1. ~\cite{Miller}.
+	,\end{equation}
+	for $k,k' \in \left\{ 1, 3, \cdots, 2^{N-n}-1 \right\}$,
+	$j \in \left\{ 0, 2, \cdots, 2^{N-n} \right\}$, and $n \in \left\{ 0, 1, \cdots, N\right\}$.
+	Here, $H$ is a smoothing parameter, $A$ is an amplitude parameter,
+	and $R$ is a random number from a uniform distribution between -1 and 1. ~\cite{Miller}.
 
 	\begin{figure}[ht]
 	\includegraphics[scale=0.25]{midpoints.jpg}
@@ -148,7 +142,7 @@
 	
 	\subsection{Variations: Triangular Mesh}
 	It is also relatively common to implement a midpoint displacement rule using a triangular, rather than square, mesh.
-	The subdivision rules are slightly more complex to described as a formula, but algorithmically identical in principle.
+	The subdivision rules are slightly more complex to describe as a formula, but algorithmically identical in principle.
 	Triangles have the advantage of providing an unambiguous surface definition from the heightfield, because every triangle
 	is necessarily planar. Heightfields defined by meshes containing polygons with 4 or more edges can be produced from families
 	of surfaces parameterized by the orientation of creases when those polygons are nonplanar (see Figure \ref{fig:trimesh}).
@@ -167,20 +161,21 @@
 	\label{sec:FFT}
 	In 1965, J.W. Cooley and J.W. Tukey published the fast Fourier transform algorithm.
 	This algorithm made it possible to calculate the discrete Fourier transform using multiple operations
-	in time $O(NlogN).$ The fast Fourier transform makes it possible for us to generate a fractal terrain.
-	A Fourier transform is another method to generate fractal terrains. This is typically used to generate
-	older terrains with a flatter landscape. The landscape created by a Fourier transform can be tiled.
+	in time $O(NlogN)$. The fast Fourier transform makes it possible for us to generate a fractal terrain
+	by manipulation of a height field in the frequency domain. This method is typically used to generate
+	older terrains with a flatter landscape.
 	The Fourier transform enables us to express random noise as a function of sine and cosine functions,
 	and it converts the function to a frequency domain. The result is a fractal landscape with smooth rolling
-	features rather than ridges and peaks that can be generated using other methods. Thus, the landscape is a sum
-	of the sine and cosine waves at different frequencies.
+	features rather than the ridges and peaks that can be generated using other methods. Since the landscape is
+	explicitly expressed as a sum of sine and cosine waves at different frequencies, the landscape created by a
+	Fourier transform can be tiled.
 	
 	Unlike many other processes for fractal terrain generation, the Fourier method is not an iterative process ~\cite{Kareem}.
 	Initially, we begin using a random Gaussian noise (other types of noise can be used here as well), which is a two dimensional
 	grid of discrete random values. Using Maple, we are able to apply the fast Fourier transform (FFT), which preforms a discrete
-	Fourier transform (DFT). A two dimensional discrete Fourier transform for and $N$x$M$ grid in the $x$, $y$ plane is 
+	Fourier transform (DFT). A two dimensional discrete Fourier transform for and $N$x$M$ grid in the $x$, $y$ plane is described by
 	$$F(u,v)=\frac{1}{NM}\displaystyle\sum\limits_{x=0}^{N-1} \displaystyle\sum\limits_{y=0}^{M-1} f(x,y)e^{-2\pi i(xu/N+yu/M)},$$
-	and the inverse is
+	and the inverse by
 	$$f(x,y)=\displaystyle\sum\limits_{u=0}^{N-1} \displaystyle\sum\limits_{v=0}^{M-1} F(u,v)e^{2\pi i(xu/N+yv/M)}.$$ ~\cite{CooleyTukey}.
 
 	The FFT allows us to decompose the random noise into the sum of the sine and cosine functions. In Fourier space, the noise is broken
@@ -194,10 +189,10 @@
 	``rolling'' quality ~\cite{Kareem}. We apply this FFT to a two dimensional random noise, but we are able to view the data in three
 	dimensions. The result is a fractal landscape. There are no artificial ridges or peaks and the landscape is easily tiled.
 	
-	The characteristics of the landscape are determined by the random seed number. How rough or smooth the surface of the landscape
-	is depends on the value you scale the frequencies by. The higher the number you scale by the smoother the landscape. The smaller
-	the scaling number, the rougher the landscape. Though we can change the relative roughness of the terrain the landscape will have
-	a smooth surface in comparison to the previous methods we described.  
+	The characteristics of the landscape are determined by the random seed number. Appropriate choice of $r$ governs the relative
+	roughness (or smoothness) of the generated terrain: larger values of $r$ create smoother landscapes, and smaller
+	values create rougher landscapes. Though we can change the relative roughness of the terrain, it will still have
+	a relatively smooth surface in comparison to the previous methods we described.  
 
 	\begin{figure}[ht]
 	\includegraphics[scale=0.35]{FourierLandscape.jpg}
