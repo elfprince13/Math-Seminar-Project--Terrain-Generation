@@ -62,14 +62,14 @@
 	\S \ref{sec:midpoint} explores the Midpoint Displacement Algorithm.
 	The algorithm is the simplest algorithm for generating terrain.
 
-	Another method that is similar to, but not exactly the same as, the Midpoint Displacement Algorithm is the Diamonds \& Squares Algorithm.
+	Another method that is similar to the Midpoint Displacement Algorithm is the Diamonds \& Squares Algorithm.
 	Alain Fournier, Don Fussell, and Loren Carpenter first described the Diamonds \& Squares Algorithm at SIGGRAPH 1982 (Special Interest
 	Group on GRAPHics and Interactive Techniques). Gavin S. P. Miller revisited this algorithm in 1986 at the same conference. This is when
 	it was discovered that the algorithm was “flawed”. The algorithm produces vertical and horizontal creases in the generated landscape.
 	~\cite{Miller}.
 
 	Both the Diamonds \& Squares Algorithm and the Midpoint Displacement Algorithm use multiple iterations of random values to create a landscape.
-	These algorithms apply successively smaller perturbatons to the landscape on each iteration. Both of these algorithms use recursive subdivision methods, which allows both of these algorithms to be run in
+	These algorithms apply successively smaller perturbatons to the landscape on each iteration. Both of these algorithms use recursive subdivision methods, which allows them to be run in
 	linear time. ~\cite{Miller}.
 
 	\S \ref{sec:FFT} describes how to use the Fast Fourier transformation to create fractal landscapes by manipulation
@@ -79,7 +79,7 @@
 	\S \ref{sec:multifractal} describes the multi-fractal and its application to terrain generation. A multi-fractal
 	set is a set of fractals that can be divided into multiple subsets, each having their own dimension. A multi-fractal
 	system is different from a fractal system because it has more than just one exponent. A multi-fractal system is used when
-	more than one exponent is needed to describe the dynamics of an object. This can be seen in terrain generation. They allow
+	more than one exponent is needed to describe the dynamics of an object, which can be seen in terrain generation. This allows
 	for a more precise and natural looking landscape as the magnification is increased. 
 	
 	Finally, \S \ref{sec:ourterrain} describes the generated terrain that we printed.
@@ -147,7 +147,7 @@
 	\end{figure}
 	
 	\subsection{Variations: Triangular Mesh}
-	It is also relatively common to implement a midpoint displacement rule using a triangular, rather than square, mesh.
+	It is also relatively common to implement a midpoint displacement rule using a triangular mesh rather than a square mesh.
 	The subdivision rules are slightly more complex to described as a formula, but algorithmically identical in principle.
 	Triangles have the advantage of providing an unambiguous surface definition from the heightfield, because every triangle
 	is necessarily planar. Heightfields defined by meshes containing polygons with 4 or more edges can be produced from families
@@ -167,8 +167,8 @@
 	\label{sec:FFT}
 	In 1965, J.W. Cooley and J.W. Tukey published the fast Fourier transform algorithm.
 	This algorithm made it possible to calculate the discrete Fourier transform using multiple operations
-	in time $O(NlogN).$ The fast Fourier transform makes it possible for us to generate a fractal terrain.
-	A Fourier transform is another method to generate fractal terrains. This is typically used to generate
+	in time $O(NlogN).$
+	A fast Fourier transform, (FFT), is another method to generate fractal terrains. This is typically used to generate
 	older terrains with a flatter landscape. The landscape created by a Fourier transform can be tiled.
 	The Fourier transform enables us to express random noise as a function of sine and cosine functions,
 	and it converts the function to a frequency domain. The result is a fractal landscape with smooth rolling
@@ -177,14 +177,14 @@
 	
 	Unlike many other processes for fractal terrain generation, the Fourier method is not an iterative process ~\cite{Kareem}.
 	Initially, we begin using a random Gaussian noise (other types of noise can be used here as well), which is a two dimensional
-	grid of discrete random values. Using Maple, we are able to apply the fast Fourier transform (FFT), which preforms a discrete
+	grid of discrete random values. Using Maple, we are able to apply the fast Fourier transform which preforms a discrete
 	Fourier transform (DFT). A two dimensional discrete Fourier transform for and $N$x$M$ grid in the $x$, $y$ plane is 
 	$$F(u,v)=\frac{1}{NM}\displaystyle\sum\limits_{x=0}^{N-1} \displaystyle\sum\limits_{y=0}^{M-1} f(x,y)e^{-2\pi i(xu/N+yu/M)},$$
 	and the inverse is
 	$$f(x,y)=\displaystyle\sum\limits_{u=0}^{N-1} \displaystyle\sum\limits_{v=0}^{M-1} F(u,v)e^{2\pi i(xu/N+yv/M)}.$$ ~\cite{CooleyTukey}.
 
 	The FFT allows us to decompose the random noise into the sum of the sine and cosine functions. In Fourier space, the noise is broken
-	into cells. Within each cell, we can find the magnitude of the wave with that frequency. These magnitudes are then be converted to
+	into cells. Within each cell, we can find the magnitude of the wave with that frequency. These magnitudes can then be converted to
 	the frequency domain. In this domain, each frequency is a complex number. This is all done through the use of the FFT algorithm.
 	
 	Once the values are in the frequency domain, we must scale these frequencies because we will have some that are very high and
@@ -207,8 +207,8 @@
 
 	\section{Multi-fractal Technique}
 	\label{sec:multifractal}
-	Multi-fractal technique is an extremely recent technique in generating terrain. This technique so far has mostly been used to
-	extract information for images of natural terrain. It then takes this information extracted from the image and create a generated
+	Multi-fractal technique is an extremely recent technique in generating terrain. This technique has mostly been used to
+	extract information for images of natural terrain. It then takes this information extracted from the image and creates a generated
 	landscape matching the natural landscape in the picture. This technique has been used in SAR (Synthetic Aperture Radar) imaging
 	for generating what the terrain on Mars and other planets look like. However, this technique can be applied to generating a whole
 	new terrain that is not based off an image.  This is what makes the multi-fractal technique a valuable technique. It can be used to
