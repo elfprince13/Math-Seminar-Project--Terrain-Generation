@@ -251,11 +251,15 @@
 
 	\section{Our Artificial Three Dimensional Terrain}
 	\label{sec:ourterrain}
+	The method that we used to generate our 3D terrain was the multiplication method. The idea behind this method is that there are already two terrains that have already been generated. These two terrains can either be generated using the same algorithm or two different algorithms. The method takes the two generated landscapes and multiplies them together to produce another different landscape. This is a method that is used because it also helps eliminate the unnaturalness of the computer generated terrain.
 	It is also possible to combine generated terrain of like dimensions by multiplication of their respective heightfields.
 	If the terrain heightfields are normalized, this is quite simple. If the heightfields are not normalized, you can instead
 	take their geometric mean to keep the height values within a reasonable range. When working with generated terrains, this
 	multiplication technique can produce added realism for certain types of landscapes, as it will result in flatter valleys and
-	sharper peaks (see Figure \ref{fig:multiplication}). 
+	sharper peaks. 	
+	
+	The two algorithms that were used to create our landscape are the Diamonds \& Squares algorithm and the Midpoint Displacement algorithm. Using Maple, we generated two separate landscapes, using the two methods mentioned above, and then took the resulting two landscapes and multiplied them together to result in our final landscape.
+(see Figure \ref{fig:multiplication}). 
 
 	\begin{figure}[ht]
 	\includegraphics[scale=0.275]{multipliedterrain.jpg}
@@ -285,11 +289,8 @@
 	the terrain look more realistic as the magnification changes. Having more than one fractal dimension defining the terrain helps
 	eliminate the unnatural looking horizontal and vertical creases that can be observed in the above two methods.
   
-	Another method of terrain generation that has been of great interest is the method of multiplying two generated terrains together.
-	The idea behind this method is that there are already two terrains that have already been generated. These two terrains can either
-	be generated using the same algorithm or two different algorithms. The method takes the two generated landscapes and multiplies
-	them together to produce another different landscape. This is a method that is used because it also helps eliminate the unnaturalness
-	of the computer generated terrain.
+	The last method of terrain generation that has been discussed in this paper of  is the method of multiplication method. This method is the method that was used to generate our 3D terrain. We used this method because it made the two terrains that we had generated in Maple look more natural. This method provided us with a way to create a new terrain that had less 'creases' throughout the terrain and looked more like a real landscape.
+
      
     Terrain generation is a fairly recent branch of mathematics. Fractals can be seen throughout history in art and in the real world.
 	Though, they were not formally defined until 1975. It was also not until 1986 that the Diamonds \& Squares Algorithm was formally introduced
